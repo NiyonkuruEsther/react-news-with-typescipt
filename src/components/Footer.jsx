@@ -5,7 +5,7 @@ import Logo from "../assets/Logo2.svg";
 function Footer() {
   return (
     <footer className="bg-gray-800">
-      <div className="container mx-auto px-4 py-12 flex flex-col sm:flex-row justify-between items-center">
+      <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto py-2 flex flex-col sm:flex-row justify-between items-center">
         <div className="text-center sm:text-left">
           <a href={1}>
             <img src={Logo} alt="Logo" className="h-24" />

@@ -1,5 +1,4 @@
 import React from "react";
-// import { a } from "react-router-dom";
 
 function CategoriesSection() {
   const categories = [
@@ -37,7 +36,7 @@ function CategoriesSection() {
 
   return (
     <section className="bg-white py-6">
-      <div className="container mx-auto">
+      <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto">
         <h2 className="text-3xl font-bold text-gray-900">Categories</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
           {categories.map((item, index) => (
