@@ -1,59 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import NewsCard from "./NewsCard";
 
 const languages = [
   { value: "", text: "Options" },
-  { value: "en", text: "English" },
   { value: "fr", text: "French" },
-  // { value: "bn", text: "Bengali" },
+  { value: "en", text: "English" },
 ];
 
 function LatestNews() {
+  const { t } = useTranslation();
   const [lang, setLang] = useState("");
-  const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const langParam = searchParams.get("lng");
-
-    if (langParam && langParam !== lang) {
-      setLang(langParam);
-      i18n.changeLanguage(langParam);
-    } else {
-      setLang("en");
-      i18n.changeLanguage("en");
-    }
-  }, [lang, i18n]);
 
   const handleChange = (e) => {
-    const newLang = e.target.value;
-    setLang(newLang);
+    setLang(e.target.value);
     let loc = "http://localhost:5173/";
-    window.location.replace(loc + "?lng=" + newLang);
-    i18n.changeLanguage(newLang);
+    window.location.replace(loc + "?lng=" + e.target.value);
   };
-
   const news = [
     {
       id: 1,
-      title: "Lorem Ipsum is simply dummy text",
-      author: "John Doe",
-      date: "May 25, 2021",
+      title: t("Lorem Ipsum is simply dummy text"),
+      author: t("John Doe"),
+      date: t("May 25, 2021"),
       imageUrl: "https://picsum.photos/id/1018/500/300",
     },
     {
       id: 2,
-      title: "It is a long established fact that a reader",
-      author: "Jane Smith",
-      date: "May 23, 2021",
+      title: t("It is a long established fact that a reader"),
+      author: t("Jane Smith"),
+      date: t("May 23, 2021"),
       imageUrl: "https://picsum.photos/id/1025/500/300",
     },
     {
       id: 3,
-      title: "There are many variations of passages",
-      author: "Mike Johnson",
-      date: "May 20, 2021",
+      title: t("There are many variations of passages"),
+      author: t("Mike Johnson"),
+      date: t("May 20, 2021"),
       imageUrl: "https://picsum.photos/id/1015/500/300",
     },
   ];
@@ -66,9 +49,9 @@ function LatestNews() {
           return <NewsCard key={item.id} item={item} />;
         })}
         <select value={lang} onChange={handleChange}>
-          {languages.map((item) => {
+          {languages.map((item, index) => {
             return (
-              <option key={item.value} value={item.value}>
+              <option key={index} value={item.value}>
                 {item.text}
               </option>
             );
