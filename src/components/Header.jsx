@@ -61,7 +61,7 @@ function Header() {
       <div
         className={` bg-white fixed top-0  ${
           tabValue
-            ? `w-screen mx-auto h-fit transition-all ease-in-out duration-300 inset-x-0 z-[10000000] overflow-hidden ${
+            ? `w-screen mx-auto h-fit transition-all ease-in-out duration-300 inset-x-0 z-[10000000] ${
                 scrolled < 10
                   ? "pb-8 pt-2 transition-all duration-700 delay-200 top-auto"
                   : "py-5 transition-all duration-700 top-0"
