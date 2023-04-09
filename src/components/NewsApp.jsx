@@ -20,10 +20,26 @@ function News() {
   const [selectedPublisher, setSelectedPublisher] = useState(null);
 
   const handlePublisherChange = (publisher) => {
+    // console.log("hello");
+    console.log(
+      publisher.name,
+      ";",
+      publishers.publishers[0].name,
+      ";",
+      publishers.publishers.filter((article, index) => {
+        article.name === publisher.name;
+      }),
+
+      "hello momo"
+    );
     setSelectedPublisher(publisher);
-    if (!articles[publisher.id]) {
-      dispatch(fetchArticles(publisher));
-    }
+    // const relatedArticlesOfPublisher = publishers.filter((article) => {
+    //   article.name === publisher.name;
+    // });
+    // console.log(relatedArticlesOfPublisher, "hell momiee");
+    // if (!articles[publisher.id]) {
+    // dispatch(fetchArticles(publisher));
+    // }
   };
 
   // Memoize the publishers array so that it's computed only when needed
@@ -40,11 +56,12 @@ function News() {
         <p>
           Select a publisher:
           {memoizedPublishers.publishers.map((publisher) => (
-            <span key={publisher.id}>
-              <button onClick={() => handlePublisherChange(publisher)}>
-                {publisher.name}
-              </button>
-            </span>
+            <button
+              key={publisher.id}
+              onClick={() => handlePublisherChange(publisher)}
+            >
+              {publisher.name}
+            </button>
           ))}
         </p>
       )}
