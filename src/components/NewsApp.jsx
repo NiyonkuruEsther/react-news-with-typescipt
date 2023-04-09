@@ -62,7 +62,7 @@ function News() {
             <p>No articles found for this publisher.</p>
           )}
         </>
-)}
+      )}
     </>
   );
 }
