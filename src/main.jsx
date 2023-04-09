@@ -1,15 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";
-import "./i18n.js";
-import { Suspense } from "react";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { publishersSlice } from "./features/publisherSlice";
+import { articlesSlice } from "./features/newsSlice";
+import News from "./components/NewsApp";
+
+const store = configureStore({
+  reducer: {
+    articles: articlesSlice.reducer,
+    publishers: publishersSlice.reducer,
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {" "}
-    <Suspense fallback="...loading">
-      <App />
-    </Suspense>
+    <Provider store={store}>
+      <News />
+    </Provider>
   </React.StrictMode>
 );

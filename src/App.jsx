@@ -4,15 +4,17 @@ import LatestNews from "./components/LatestNews";
 import CategoriesSection from "./components/CategoriesSection";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import News from "./components/NewsApp";
 
 function App() {
   return (
     <div className="bg-gray-100">
-      <Header />
+      {/* <Header />
       <HeroSection />
       <LatestNews />
       <CategoriesSection />
-      <Footer />
+      <Footer /> */}
+      <News />
     </div>
   );
 }

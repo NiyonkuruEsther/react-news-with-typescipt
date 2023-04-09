@@ -16,6 +16,7 @@ export const fetchPublishers = createAsyncThunk(
       `https://newsapi.org/v2/sources?apiKey=${API_KEY}`
     );
     const data = await response.json();
+    console.log(data);
     return data.sources;
   }
 );
