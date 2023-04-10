@@ -13,7 +13,7 @@ export const fetchPublishers = createAsyncThunk(
   "publishers/fetchPublishers",
   async () => {
     const response = await fetch(
-      `https://newsapi.org/v2/sources?apiKey=${API_KEY}`
+      `https://news-proxy.netlify.app/api/top-headlines/sources?apiKey=${API_KEY}`
     );
     const data = await response.json();
     console.log(data);

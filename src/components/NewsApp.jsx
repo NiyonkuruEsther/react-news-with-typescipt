@@ -7,12 +7,12 @@ import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
 import { useEffect, useMemo } from "react";
 
 import { useState } from "react";
+import TopArticles from "./TopArticles";
 
 function News() {
   const dispatch = useDispatch();
-  const articles = useSelector(selectArticlesByPublisher);
+  const articles = useSelector(selectArticlesByPublisher).articles || {};
   const publishers = useSelector(selectPublishers);
-
   useEffect(() => {
     dispatch(fetchPublishers());
   }, [dispatch]);
@@ -20,26 +20,13 @@ function News() {
   const [selectedPublisher, setSelectedPublisher] = useState(null);
 
   const handlePublisherChange = (publisher) => {
-    // console.log("hello");
-    console.log(
-      publisher.name,
-      ";",
-      publishers.publishers[0].name,
-      ";",
-      publishers.publishers.filter((article, index) => {
-        article.name === publisher.name;
-      }),
-
-      "hello momo"
-    );
+    console.log(publisher.name, ";", "hello momo");
     setSelectedPublisher(publisher);
-    // const relatedArticlesOfPublisher = publishers.filter((article) => {
-    //   article.name === publisher.name;
-    // });
-    // console.log(relatedArticlesOfPublisher, "hell momiee");
-    // if (!articles[publisher.id]) {
-    // dispatch(fetchArticles(publisher));
-    // }
+    const relatedArticlesOfPublisher = publishers.publishers.filter(
+      (article) => article.name === publisher.name
+    );
+    console.log(relatedArticlesOfPublisher, "hell momiee");
+    dispatch(fetchArticles(publisher.id));
   };
 
   // Memoize the publishers array so that it's computed only when needed
@@ -48,6 +35,7 @@ function News() {
   const selectedArticles = selectedPublisher
     ? articles[selectedPublisher.id] || []
     : [];
+  //   const selectedArticlesStatus = useSelector(selectArticlesStatus);
 
   return (
     <>
@@ -66,20 +54,29 @@ function News() {
         </p>
       )}
 
-      {selectedPublisher && (
+      {selectedPublisher && <TopArticles publisherId={selectedPublisher.id} />}
+
+      {/* {selectedPublisher && (
         <>
           <h2>{selectedPublisher.name}</h2>
-          {selectedArticles.length > 0 ? (
+          {selectedArticlesStatus === "loading" ? (
+            <div className="loader">Loading...</div>
+          ) : selectedArticlesStatus === "succeeded" ? (
             <ul>
               {selectedArticles.map((article) => (
-                <li key={article.id}>{article.title}</li>
+                <li key={article.title}>
+                  <a href={article.url} target="_blank" rel="noreferrer">
+                    {article.title}
+                  </a>
+                </li>
               ))}
             </ul>
           ) : (
-            <p>No articles found for this publisher.</p>
+            <p>{error}</p>
           )}
         </>
       )}
+      {console.log(articles, "articles")} */}
     </>
   );
 }
