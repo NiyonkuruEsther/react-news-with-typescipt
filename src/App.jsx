@@ -21,8 +21,9 @@ function App() {
           <Route path="/" element={<CategoriesSection />} />
         </Routes>
       </Router> */}
-      <Footer />
       <News />
+
+      <Footer />
     </div>
   );
 }

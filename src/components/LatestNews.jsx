@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import { useTranslation } from "react-i18next";
 import NewsCard from "./NewsCard";
-import Carousel from "react-alice-carousel";
+import AliceCarousel from "react-alice-carousel";
 
 import "react-alice-carousel/lib/alice-carousel.css";
 
@@ -21,21 +21,6 @@ function LatestNews() {
   //   window.location.replace(loc + "?lng=" + e.target.value);
   // };
 
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const handleSlideChange = (e) => {
-    setActiveSlideIndex(e.item);
-  };
-  const carouselOptions = {
-    items: 3,
-    dotsDisabled: true,
-    buttonsDisabled: true,
-    slideBy: 3,
-    responsive: {
-      0: { items: 1 },
-      768: { items: 2 },
-      1024: { items: 3 },
-    },
-  };
   const news = [
     {
       id: 1,
@@ -74,27 +59,23 @@ function LatestNews() {
     },
     {
       id: 6,
-      title: 
-        "Nam libero tempore, cum soluta nobis est eligendi optio cumque"
-      ,
+      title: "Nam libero tempore, cum soluta nobis est eligendi optio cumque",
       author: "Emily Davis",
       date: "October 7, 2021",
       imageUrl: "https://picsum.photos/id/1033/500/300",
     },
     {
       id: 7,
-      title: 
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
-      ,
+      title:
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore",
       author: "Michael Lee",
       date: "November 19, 2021",
       imageUrl: "https://picsum.photos/id/1043/500/300",
     },
     {
       id: 8,
-      title: 
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-      ,
+      title:
+        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       author: "Karen Anderson",
       date: "December 4, 2021",
       imageUrl: "https://picsum.photos/id/1045/500/300",
@@ -120,27 +101,10 @@ function LatestNews() {
     <section className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto py-12">
       <h2 className="text-3xl font-bold text-gray-900">Latest News</h2>
       <div className="mt-6">
-        <Carousel
-          slideToIndex={activeSlideIndex}
-          onSlideChanged={handleSlideChange}
-          {...carouselOptions}
-        >
-          {news.map((item) => {
-            return <NewsCard key={item.id} item={item} />;
-          })}
-        </Carousel>
+        {news.map((item) => {
+          return <NewsCard key={item.id} item={item} />;
+        })}
       </div>
-
-      {/* <select value={lang} onChange={handleChange}>
-          {languages.map((item, index) => {
-            return (
-              <option key={index} value={item.value}>
-                {item.text}
-              </option>
-            );
-          })}
-        </select>
-      </div> */}
     </section>
   );
 }

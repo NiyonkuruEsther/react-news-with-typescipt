@@ -7,6 +7,7 @@ import {
 } from "../features/newsSlice";
 import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
 import { useEffect, useMemo } from "react";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 
 function News() {
   const dispatch = useDispatch();
@@ -31,12 +32,12 @@ function News() {
     : [];
 
   return (
-    <>
-      <h1>News</h1>
+    <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto py-12">
+      <h1 className="font-bold">News</h1>
       {memoizedPublishers.publishers.length > 0 && (
         <div className="">
           <p>Select a publisher:</p>
-          <TransitionGroup className="flex flex-wrap items-center gap-3 relative">
+          <TransitionGroup className="grid grid-cols-3 max-w-fit whitespace-nowrap items-center gap-3 relative">
             {showAllPublishers
               ? memoizedPublishers.publishers.map((publisher) => (
                   <CSSTransition
@@ -52,21 +53,24 @@ function News() {
                     </button>
                   </CSSTransition>
                 ))
-              : memoizedPublishers.publishers.slice(0, 10).map((publisher) => (
-                  <button
-                    key={publisher.id}
-                    className="bg-blue-400 p-2 ring-4 rounded-md ring-blue-700"
-                    onClick={() => handlePublisherChange(publisher)}
-                  >
-                    {publisher.name}
-                  </button>
-                ))}
+              : memoizedPublishers.publishers
+                  .filter((item, index) => index <= 10)
+                  .map((publisher) => (
+                    <button
+                      key={publisher.id}
+                      className="bg-blue-400 p-2 ring-4 rounded-md ring-blue-700"
+                      onClick={() => handlePublisherChange(publisher)}
+                    >
+                      {publisher.name}
+                    </button>
+                  ))}
+
             {memoizedPublishers.publishers.length > 10 && (
               <button
                 className="bg-gray-300 p-2 rounded-full focus:outline-none absolute right-3 top-3"
                 onClick={() => setShowAllPublishers(!showAllPublishers)}
               >
-                {/* show/hide button */}
+                {showAllPublishers ? <BsArrowDown /> : <BsArrowUp />}
               </button>
             )}
           </TransitionGroup>
@@ -86,7 +90,7 @@ function News() {
           ))}
         </>
       )}
-    </>
+    </div>
   );
 }
 

@@ -1,14 +1,16 @@
-// import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
   FaHandshake,
   FaFlag,
   FaLaptop,
   FaFilm,
   FaFutbol,
-  FaHome,
 } from "react-icons/fa";
+import { fetchPublishers } from "../features/publisherSlice";
 
 function CategoriesSection() {
+  const dispatch = useDispatch();
+
   const categories = [
     {
       id: 1,
@@ -42,17 +44,20 @@ function CategoriesSection() {
     },
   ];
 
+  const handleCategoryClick = (categoryName) => {
+    dispatch(fetchPublishers(categoryName.toLowerCase()));
+  };
+
   return (
-    <section className="bg-white py-6">
+    <section className="bg-white pt-6 pb-8">
       <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto">
         <h2 className="text-3xl font-bold text-gray-900">Categories</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
           {categories.map((item, index) => (
             <button
-              // to={``}
               key={item.id}
-              // to={`/${item.name.toLowerCase()}`}
               className={`p-4 flex items-center gap-8 justify-center rounded-lg shadow-md hover:shadow-lg transform transition duration-200 hover:-translate-y-1 bg-gradient-to-r ${item.color}`}
+              onClick={() => handleCategoryClick(item.name)}
             >
               {item.icon}
               <span className="text-white text-lg">{item.name}</span>

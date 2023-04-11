@@ -2,11 +2,11 @@ import React from "react";
 
 function NewsCard({ item }) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white max-h-max h-full flex flex-col justify-between rounded-lg shadow-md overflow-hidden mx-4">
       <img
         src={item.imageUrl}
         alt={item.title}
-        className="w-full h-56 object-cover"
+        className="w-full  object-scale-down"
       />
       <div className="p-4">
         <h3 className="text-xl font-bold">{item.title}</h3>
