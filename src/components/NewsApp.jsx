@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
 import {
   fetchArticles,
   selectArticlesByPublisher,
@@ -17,17 +16,13 @@ function News() {
     dispatch(fetchPublishers());
   }, [dispatch]);
 
-  const [selectedPublisher, setSelectedPublisher] = useState(null);
+  const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
   const [showAllPublishers, setShowAllPublishers] = useState(false);
 
   const handlePublisherChange = (publisher) => {
     setSelectedPublisher(publisher);
-    const relatedArticlesOfPublisher = publishers.publishers.filter(
-      (article) => article.name === publisher.name
-    );
     dispatch(fetchArticles(publisher.id));
   };
-
   // Memoize the publishers array so that it's computed only when needed
   const memoizedPublishers = useMemo(() => publishers, [publishers]);
 
