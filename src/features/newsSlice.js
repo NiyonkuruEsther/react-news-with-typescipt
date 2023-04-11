@@ -13,7 +13,7 @@ export const fetchArticles = createAsyncThunk(
   async (publisher) => {
     try {
       const response = await fetch(
-        `https://news-proxy.netlify.app/api/top-headlines?sources=${publisher}&apiKey=${API_KEY}`
+        `https://news-proxy.netlify.app/api/everything?sources=${publisher}&apiKey=${API_KEY}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch articles");

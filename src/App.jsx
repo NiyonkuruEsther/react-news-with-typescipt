@@ -5,6 +5,8 @@ import CategoriesSection from "./components/CategoriesSection";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import News from "./components/NewsApp";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import BusinessPage from "./components/BusinessPage";
 
 function App() {
   return (
@@ -12,7 +14,12 @@ function App() {
       <Header />
       <HeroSection />
       <LatestNews />
-      <CategoriesSection />
+      <Router>
+        <Routes>
+          <Route path="/business" element={<BusinessPage />} />
+          <Route path="/" element={<CategoriesSection />} />
+        </Routes>
+      </Router>
       <Footer />
       <News />
     </div>

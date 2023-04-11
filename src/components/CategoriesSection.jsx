@@ -1,17 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { FaHandshake, FaFlag } from "react-icons/fa";
 
 function CategoriesSection() {
   const categories = [
     {
       id: 1,
       name: "Business",
-      icon: "fa fa-handshake",
+      icon: "<FaHandshake/>",
       color: "from-yellow-600 to-yellow-400",
     },
     {
       id: 2,
       name: "Politics",
-      icon: "fa fa-flag",
+      icon: "<FaFlag/>",
       color: "from-blue-600 to-blue-400",
     },
     {
@@ -40,16 +42,16 @@ function CategoriesSection() {
         <h2 className="text-3xl font-bold text-gray-900">Categories</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
           {categories.map((item, index) => (
-            <a
+            <Link
               href=""
               key={item.id}
-              //   to={index}
-              //   to={`/${item.name.toLowerCase()}`}
+              to={`/business`}
+              // to={`/${item.name.toLowerCase()}`}
               className={`p-4 flex items-center rounded-lg shadow-md hover:shadow-lg transform transition duration-200 hover:-translate-y-1 bg-gradient-to-r ${item.color}`}
             >
-              <i className={`${item.icon} text-4xl text-white mr-4`} />
+              {item.icon}
               <span className="text-white text-lg">{item.name}</span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

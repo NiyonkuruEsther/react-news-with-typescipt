@@ -5,9 +5,8 @@ import {
 } from "../features/newsSlice";
 import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
 import { useEffect, useMemo } from "react";
-
 import { useState } from "react";
-import TopArticles from "./TopArticles";
+// import TopArticles from "./TopArticles";
 
 function News() {
   const dispatch = useDispatch();
@@ -58,7 +57,7 @@ function News() {
         </div>
       )}
 
-      {selectedPublisher && <TopArticles publisherId={selectedPublisher.id} />}
+      {/* {selectedPublisher && <TopArticles publisherId={selectedPublisher.id} />} */}
 
       {selectedPublisher && (
         <>

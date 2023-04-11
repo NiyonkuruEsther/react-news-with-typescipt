@@ -11,9 +11,9 @@ const initialPublishersState = {
 
 export const fetchPublishers = createAsyncThunk(
   "publishers/fetchPublishers",
-  async () => {
+  async (category) => {
     const response = await fetch(
-      `https://news-proxy.netlify.app/api/top-headlines/sources?apiKey=${API_KEY}`
+      `https://news-proxy.netlify.app/api/top-headlines/sources?category${category}=&apiKey=${API_KEY}`
     );
     const data = await response.json();
     console.log(data);
