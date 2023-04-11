@@ -1,12 +1,13 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 import {
   fetchArticles,
   selectArticlesByPublisher,
 } from "../features/newsSlice";
 import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
 import { useEffect, useMemo } from "react";
-import { useState } from "react";
-// import TopArticles from "./TopArticles";
 
 function News() {
   const dispatch = useDispatch();
@@ -17,14 +18,13 @@ function News() {
   }, [dispatch]);
 
   const [selectedPublisher, setSelectedPublisher] = useState(null);
+  const [showAllPublishers, setShowAllPublishers] = useState(false);
 
   const handlePublisherChange = (publisher) => {
-    console.log(publisher.name, ";", "hello momo");
     setSelectedPublisher(publisher);
     const relatedArticlesOfPublisher = publishers.publishers.filter(
       (article) => article.name === publisher.name
     );
-    console.log(relatedArticlesOfPublisher, "hell momiee");
     dispatch(fetchArticles(publisher.id));
   };
 
@@ -34,7 +34,6 @@ function News() {
   const selectedArticles = selectedPublisher
     ? articles[selectedPublisher.id] || []
     : [];
-  //   const selectedArticlesStatus = useSelector(selectArticlesStatus);
 
   return (
     <>
@@ -42,22 +41,42 @@ function News() {
       {memoizedPublishers.publishers.length > 0 && (
         <div className="">
           <p>Select a publisher:</p>
-          <div className="grid grid-cols-4 gap-3">
-            {" "}
-            {memoizedPublishers.publishers.map((publisher) => (
+          <TransitionGroup className="flex flex-wrap items-center gap-3 relative">
+            {showAllPublishers
+              ? memoizedPublishers.publishers.map((publisher) => (
+                  <CSSTransition
+                    classNames="fade"
+                    timeout={500}
+                    key={publisher.id}
+                  >
+                    <button
+                      className="bg-blue-400 p-2 ring-4 rounded-md ring-blue-700"
+                      onClick={() => handlePublisherChange(publisher)}
+                    >
+                      {publisher.name}
+                    </button>
+                  </CSSTransition>
+                ))
+              : memoizedPublishers.publishers.slice(0, 10).map((publisher) => (
+                  <button
+                    key={publisher.id}
+                    className="bg-blue-400 p-2 ring-4 rounded-md ring-blue-700"
+                    onClick={() => handlePublisherChange(publisher)}
+                  >
+                    {publisher.name}
+                  </button>
+                ))}
+            {memoizedPublishers.publishers.length > 10 && (
               <button
-                className="bg-blue-400  p-2 ring-4 rounded-md ring-blue-700"
-                key={publisher.id}
-                onClick={() => handlePublisherChange(publisher)}
+                className="bg-gray-300 p-2 rounded-full focus:outline-none absolute right-3 top-3"
+                onClick={() => setShowAllPublishers(!showAllPublishers)}
               >
-                {publisher.name}
+                {/* show/hide button */}
               </button>
-            ))}
-          </div>
+            )}
+          </TransitionGroup>
         </div>
       )}
-
-      {/* {selectedPublisher && <TopArticles publisherId={selectedPublisher.id} />} */}
 
       {selectedPublisher && (
         <>
@@ -72,7 +91,6 @@ function News() {
           ))}
         </>
       )}
-      {console.log(articles, "articles")}
     </>
   );
 }

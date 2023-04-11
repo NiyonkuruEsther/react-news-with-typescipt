@@ -14,12 +14,13 @@ function App() {
       <Header />
       <HeroSection />
       <LatestNews />
-      <Router>
+      <CategoriesSection />
+      {/* <Router>
         <Routes>
-          <Route path="/business" element={<BusinessPage />} />
+          <Route path="/:name" element={<BusinessPage />} />
           <Route path="/" element={<CategoriesSection />} />
         </Routes>
-      </Router>
+      </Router> */}
       <Footer />
       <News />
     </div>
