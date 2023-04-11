@@ -41,42 +41,39 @@ function News() {
     <>
       <h1>News</h1>
       {memoizedPublishers.publishers.length > 0 && (
-        <p>
-          Select a publisher:
-          {memoizedPublishers.publishers.map((publisher) => (
-            <button
-              key={publisher.id}
-              onClick={() => handlePublisherChange(publisher)}
-            >
-              {publisher.name}
-            </button>
-          ))}
-        </p>
+        <div className="">
+          <p>Select a publisher:</p>
+          <div className="grid grid-cols-4 gap-3">
+            {" "}
+            {memoizedPublishers.publishers.map((publisher) => (
+              <button
+                className="bg-blue-400  p-2 ring-4 rounded-md ring-blue-700"
+                key={publisher.id}
+                onClick={() => handlePublisherChange(publisher)}
+              >
+                {publisher.name}
+              </button>
+            ))}
+          </div>
+        </div>
       )}
 
       {selectedPublisher && <TopArticles publisherId={selectedPublisher.id} />}
 
-      {/* {selectedPublisher && (
+      {selectedPublisher && (
         <>
           <h2>{selectedPublisher.name}</h2>
-          {selectedArticlesStatus === "loading" ? (
-            <div className="loader">Loading...</div>
-          ) : selectedArticlesStatus === "succeeded" ? (
-            <ul>
-              {selectedArticles.map((article) => (
-                <li key={article.title}>
-                  <a href={article.url} target="_blank" rel="noreferrer">
-                    {article.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>{error}</p>
-          )}
+
+          {selectedArticles.map((article) => (
+            <li key={article.title}>
+              <a href={article.url} target="_blank" rel="noreferrer">
+                {article.title}
+              </a>
+            </li>
+          ))}
         </>
       )}
-      {console.log(articles, "articles")} */}
+      {console.log(articles, "articles")}
     </>
   );
 }

@@ -11,9 +11,9 @@ function TopArticles({ publisherId }) {
     <div>
       <h2>Top 10 Articles</h2>
       <ol>
-        {articles.slice(0, 10).map((article) => (
+        {/* {articles?.slice(0, 10).map((article) => (
           <li key={article.url}>{article.title}</li>
-        ))}
+        ))} */}
       </ol>
     </div>
   );

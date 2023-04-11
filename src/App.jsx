@@ -9,11 +9,11 @@ import News from "./components/NewsApp";
 function App() {
   return (
     <div className="bg-gray-100">
-      {/* <Header />
+      <Header />
       <HeroSection />
       <LatestNews />
       <CategoriesSection />
-      <Footer /> */}
+      <Footer />
       <News />
     </div>
   );

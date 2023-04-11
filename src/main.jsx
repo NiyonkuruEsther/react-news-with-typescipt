@@ -5,6 +5,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { publishersSlice } from "./features/publisherSlice";
 import { articlesSlice } from "./features/newsSlice";
 import News from "./components/NewsApp";
+import App from "./App";
+import "./index.css";
 
 const store = configureStore({
   reducer: {
@@ -16,7 +18,7 @@ const store = configureStore({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <News />
+      <App />
     </Provider>
   </React.StrictMode>
 );
