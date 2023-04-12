@@ -1,7 +1,7 @@
 // publishersSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const API_KEY = "a98cf4c8fe49490e9d3e5e291aafe63f";
+const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
 const initialPublishersState = {
   publishers: [],
@@ -16,7 +16,7 @@ export const fetchPublishers = createAsyncThunk(
       `https://news-proxy.netlify.app/api/top-headlines/sources?category=${category}&apiKey=${API_KEY}`
     );
     const data = await response.json();
-    console.log(data);
+    console.log(data, "data", publishers);
     return data.sources;
   }
 );

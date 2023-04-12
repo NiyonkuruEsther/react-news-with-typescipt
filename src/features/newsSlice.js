@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const API_KEY = "a98cf4c8fe49490e9d3e5e291aafe63f";
+const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
 const initialArticlesState = {
   articles: {},

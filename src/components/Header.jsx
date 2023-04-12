@@ -27,10 +27,10 @@ function Header() {
     >
       <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto py-2 flex items-center justify-between">
         <a href="/">
-          <img src={Logo} alt="Logo" className="h-16" />
+          <img src={Logo} alt="Logo" className="h-24" />
         </a>
-        <nav className="hidden sm:block">
-          <ul className="flex items-center space-x-4">
+        {/* <nav className="hidden sm:block">
+          <ul className="flex items-center text-3xl space-x-4">
             <li>
               <a to="/">Home</a>
             </li>
@@ -47,8 +47,8 @@ function Header() {
               <a to="/about-us">About Us</a>
             </li>
           </ul>
-        </nav>
-        <div className="flex items-center gap-5">
+        </nav> */}
+        <div className="flex items-center gap-8 text-3xl">
           <button className="text-gray-600 hover:text-gray-800">
             <FaSearch onClick={() => setTabValue(1)} />
           </button>
@@ -74,7 +74,7 @@ function Header() {
             <input
               type="text"
               placeholder="Search..."
-              className="outline-none flex-1"
+              className="outline-none flex-1 placeholder:text-xl"
             />
             <BsSearch className="text-black" />
           </div>
@@ -82,7 +82,7 @@ function Header() {
           <div className="flex justify-end px-2">
             <div className="p-2">
               <RxCross1
-                className={`self-end hover:border w-6 h-6  rounded-full ${
+                className={`self-end hover:border w-12 h-12 p-3 rounded-full ${
                   tabValue === 1 ? " " : ""
                 }`}
                 onClick={() => {
