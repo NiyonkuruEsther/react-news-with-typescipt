@@ -13,6 +13,7 @@ function News() {
   const dispatch = useDispatch();
   const articles = useSelector(selectArticlesByPublisher).articles || {};
   const publishers = useSelector(selectPublishers);
+  console.log(publishers, "mafresheru");
   useEffect(() => {
     dispatch(fetchPublishers());
   }, [dispatch]);
@@ -24,7 +25,6 @@ function News() {
     setSelectedPublisher(publisher);
     dispatch(fetchArticles(publisher.id));
   };
-  // Memoize the publishers array so that it's computed only when needed
   const memoizedPublishers = useMemo(() => publishers, [publishers]);
 
   const selectedArticles = selectedPublisher
@@ -37,24 +37,24 @@ function News() {
       {memoizedPublishers.publishers.length > 0 && (
         <div className="">
           <p>Select a publisher:</p>
-          <TransitionGroup className="grid grid-cols-3 max-w-fit whitespace-nowrap items-center gap-3 relative">
-            {showAllPublishers
+          <div className="flex gap-3">
+            {showAllPublishers &&
+            console.log(
+              " memoizedPublishers.publishers",
+              memoizedPublishers.publishers
+            )
               ? memoizedPublishers.publishers.map((publisher) => (
-                  <CSSTransition
-                    classNames="fade"
-                    timeout={500}
-                    key={publisher.id}
-                  >
+                  <div classNames="fade" key={publisher.id}>
                     <button
                       className="bg-blue-400 p-2 ring-4 rounded-md ring-blue-700"
                       onClick={() => handlePublisherChange(publisher)}
                     >
                       {publisher.name}
                     </button>
-                  </CSSTransition>
+                  </div>
                 ))
               : memoizedPublishers.publishers
-                  .filter((item, index) => index <= 10)
+                  .filter((item, index) => index < 10)
                   .map((publisher) => (
                     <button
                       key={publisher.id}
@@ -73,7 +73,7 @@ function News() {
                 {showAllPublishers ? <BsArrowDown /> : <BsArrowUp />}
               </button>
             )}
-          </TransitionGroup>
+          </div>
         </div>
       )}
 
