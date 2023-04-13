@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import News from "./components/NewsApp";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import BusinessPage from "./components/BusinessPage";
+import Publisher from "./components/Publisher";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
           <Route path="/" element={<CategoriesSection />} />
         </Routes>
       </Router> */}
-      <News />
+      {/* <News /> */}
+      <Publisher />
 
       <Footer />
     </div>
