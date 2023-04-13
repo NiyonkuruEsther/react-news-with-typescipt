@@ -8,6 +8,7 @@ import News from "./components/NewsApp";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import BusinessPage from "./components/BusinessPage";
 import Publisher from "./components/Publisher";
+import NewsAndPublishers from "./components/NewsAndPublishers";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         </Routes>
       </Router> */}
       {/* <News /> */}
-      <Publisher />
+      <NewsAndPublishers />
 
       <Footer />
     </div>

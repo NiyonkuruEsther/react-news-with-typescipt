@@ -20,13 +20,14 @@ const Publisher = () => {
   };
   //   const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
   return (
-    <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto py-12">
+    <div>
+      {" "}
       {publishers.length > 0 && (
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid gap-3">
           {publishers.map((publisher) => (
             <div classNames="fade" key={publisher.id}>
               <button
-                className="bg-blue-400 p-2 ring-4 w-full rounded-md ring-blue-700"
+                className="bg-blue-400 p-2 ring-4 w-full rounded-md ring-blue-700 whitespace-nowrap"
                 onClick={() => handlePublisherChange(publisher)}
               >
                 {publisher.name}
