@@ -2,10 +2,20 @@ import { useRef } from "react";
 import NewsCard from "./NewsCard";
 import { NEWS } from "../data/news";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { selectArticlesByPublisher } from "../features/newsSlice";
 
 function LatestNews() {
   const blogSect = useRef(null);
-
+  // const articles = useSelector((state) => state.articles);
+  useEffect(() => {
+    dispatch(fetchPublishers());
+  }, [dispatch]);
+  const handlePublisherChange = (publisher) => {
+    setSelectedPublisher(publisher);
+    // dispatch(fetchArticles(publisher.id));
+  };
+  console.log(articles, "articles");
   const scrollRight = () => {
     blogSect.current.scrollBy({
       left: -700,
@@ -25,20 +35,20 @@ function LatestNews() {
       <div className="w-full flex justify-between ">
         <button
           onClick={scrollRight}
-          className="bg-red rounded-full top-[50%] focus:ring-4 absolute  text-white p-2"
+          className="bg-white rounded-full bg-opacity-70 left-12 top-[50%] focus:ring-4 absolute p-2"
         >
-          <BsChevronLeft />
+          <BsChevronLeft className="text-lg" />
         </button>
         <button
           onClick={scrollLeft}
-          className="bg-red rounded-full top-[50%] right-0 focus:ring-4 absolute  text-white p-2"
+          className="bg-white rounded-full bg-opacity-70 right-12 top-[50%] focus:ring-4 absolute p-2"
         >
           <BsChevronRight />
         </button>
       </div>
       <div
         ref={blogSect}
-        className="flex ease-in-out duration-500 max-w-full overflow-x-hidden mx-12"
+        className="flex ease-in-out duration-500 max-w-full overflow-x-hidden w-full"
       >
         {NEWS.map((item) => {
           return <NewsCard key={item.id} item={item} />;

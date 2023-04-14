@@ -7,7 +7,7 @@ export default {
         red: "#BD0032",
       },
       boxShadow: {
-        medium: "0 10px 20px rgb(0 0 0 / 15%), 0 5px 15px rgb(0 0 0 / 25%)",
+        medium: " 0 5px 10px rgba(0,0,0,0.3)",
       },
     },
   },

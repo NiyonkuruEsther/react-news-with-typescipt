@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
 import { useEffect } from "react";
 const Publisher = () => {
+  const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
+
   const dispatch = useDispatch();
   const { publishers } = useSelector(selectPublishers);
   console.log(publishers, "mafresheru");
@@ -21,7 +23,6 @@ const Publisher = () => {
   //   const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
   return (
     <div>
-      {" "}
       {publishers.length > 0 && (
         <div className="grid gap-3">
           {publishers.map((publisher) => (
