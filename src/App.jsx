@@ -4,10 +4,8 @@ import LatestNews from "./components/LatestNews";
 import CategoriesSection from "./components/CategoriesSection";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import News from "./components/NewsApp";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import BusinessPage from "./components/BusinessPage";
-import Publisher from "./components/Publisher";
+import FullPage from "./components/FullPage";
 import NewsAndPublishers from "./components/NewsAndPublishers";
 
 function App() {
@@ -17,12 +15,12 @@ function App() {
       <HeroSection />
       <LatestNews />
       <CategoriesSection />
-      {/* <Router>
+      <Router>
         <Routes>
-          <Route path="/:name" element={<BusinessPage />} />
+          <Route path="/:name" element={<FullPage />} />
           <Route path="/" element={<CategoriesSection />} />
         </Routes>
-      </Router> */}
+      </Router>
       {/* <News /> */}
       <NewsAndPublishers />
 

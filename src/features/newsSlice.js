@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
 const initialArticlesState = {
-  articles: {},
+  articles: [],
   status: "idle",
   error: null,
 };
@@ -13,17 +13,18 @@ export const fetchArticles = createAsyncThunk(
   async (publisher) => {
     try {
       const response = await fetch(
-        `https://news-proxy.netlify.app/api/everything?sources=${publisher}&apiKey=${API_KEY}`
+        `https://news-proxy.netlify.app/api/everything${
+          publisher
+            ? `?sources=${publisher.id}&apiKey=${API_KEY}`
+            : `&apiKey=${API_KEY}`
+        }`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch articles");
       }
       const data = await response.json();
-      console.log(publisher, "publisher");
-      console.log(data.articles);
       return data.articles;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
@@ -40,7 +41,8 @@ export const articlesSlice = createSlice({
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.articles[action.meta.arg] = action.payload;
+        // slice the news list to pick only 15
+        state.articles = action.payload.slice(0, 15);
       })
       .addCase(fetchArticles.rejected, (state, action) => {
         state.status = "failed";
@@ -50,6 +52,6 @@ export const articlesSlice = createSlice({
 });
 
 export const {} = articlesSlice.actions;
-export const selectArticlesByPublisher = (publisher) => (state) => {
-  return state.articles?.filter((article) => article.publisher === publisher);
-};
+
+// This selector now gets the entire articles array from state and uses `.filter` to return only articles with matching publisher.
+export const selectArticlesByPublisher = (state) => state?.articles.articles;

@@ -11,12 +11,11 @@ const initialPublishersState = {
 
 export const fetchPublishers = createAsyncThunk(
   "publishers/fetchPublishers",
-  async (category) => {
+  async (category='general') => {
     const response = await fetch(
       `https://news-proxy.netlify.app/api/top-headlines/sources?category=${category}&apiKey=${API_KEY}`
     );
     const data = await response.json();
-    console.log(initialPublishersState.publishers, "data");
     return data.sources;
   }
 );
@@ -42,8 +41,6 @@ export const publishersSlice = createSlice({
       });
   },
 });
-
-console.log(initialPublishersState.publishers, "data");
 
 export const {} = publishersSlice.actions;
 export const selectPublishers = (state) => state.publishers;

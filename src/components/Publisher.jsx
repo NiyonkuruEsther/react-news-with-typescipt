@@ -1,32 +1,31 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import {
-//   fetchArticles,
-//   selectArticlesByPublisher,
-// } from "../features/newsSlice";
 import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
-import { useEffect } from "react";
-const Publisher = () => {
-  const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
+import { BsArrowDown } from "react-icons/bs";
 
+const Publisher = ({ onPublisherChange }) => {
+  const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
+  const [showAllPublishers, setShowAllPublishers] = useState(false);
   const dispatch = useDispatch();
   const { publishers } = useSelector(selectPublishers);
-  console.log(publishers, "mafresheru");
+
+  const handlePublisherChange = (publisher) => {
+    setSelectedPublisher(publisher.id);
+    if (onPublisherChange) {
+      onPublisherChange(publisher);
+    }
+  };
+
   useEffect(() => {
     dispatch(fetchPublishers());
   }, [dispatch]);
-  const handlePublisherChange = (publisher) => {
-    setSelectedPublisher(publisher);
-    // dispatch(fetchArticles(publisher.id));
-  };
-  //   const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
+
   return (
-    <div>
+    <div className="flex flex-col gap-8 w-full items-center justify-center">
       {publishers.length > 0 && (
-        <div className="grid gap-3">
-          {publishers.map((publisher) => (
-            <div classNames="fade" key={publisher.id}>
+        <div className="grid gap-3 ">
+          {publishers.slice(0, 5).map((publisher) => (
+            <div key={publisher.id}>
               <button
                 className="bg-blue-400 p-2 ring-4 w-full rounded-md ring-blue-700 whitespace-nowrap"
                 onClick={() => handlePublisherChange(publisher)}
@@ -35,6 +34,45 @@ const Publisher = () => {
               </button>
             </div>
           ))}
+        </div>
+      )}
+      <button
+        onClick={() => setShowAllPublishers(true)}
+        className="rounded-full p-2 border-2 w-fit ring-2 ring-blue-700  border-blue-700"
+      >
+        <BsArrowDown className="text-3xl" />
+      </button>
+      {publishers.length > 5 && showAllPublishers && (
+        <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-4 rounded-md shadow-lg">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-bold">All Publishers</h2>
+              <button
+                className="text-gray-500"
+                onClick={() => setShowAllPublishers(false)}
+              >
+                Close
+              </button>
+            </div>
+            <div className="grid grid-cols-6 gap-3">
+              {publishers.map((publisher) => (
+                <button
+                  key={publisher.id}
+                  className={`p-2 rounded-md ${
+                    selectedPublisher === publisher.id
+                      ? "bg-blue-400 ring-4 ring-blue-700"
+                      : "bg-gray-200 ring-2 ring-gray-400"
+                  }`}
+                  onClick={() => {
+                    handlePublisherChange(publisher);
+                    setShowAllPublishers(false);
+                  }}
+                >
+                  {publisher.name}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>

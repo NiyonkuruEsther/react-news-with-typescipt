@@ -1,21 +1,22 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import NewsCard from "./NewsCard";
-import { NEWS } from "../data/news";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import { selectArticlesByPublisher } from "../features/newsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLatestArticles } from "../features/latestNews";
 
 function LatestNews() {
+  const dispatch = useDispatch();
+
   const blogSect = useRef(null);
-  // const articles = useSelector((state) => state.articles);
+  const latestArticles = useSelector((state) => state.latestArticles.latest);
+
+  // Dispatch the action to fetch latest articles on component mount
   useEffect(() => {
-    dispatch(fetchPublishers());
+    dispatch(fetchLatestArticles());
   }, [dispatch]);
-  const handlePublisherChange = (publisher) => {
-    setSelectedPublisher(publisher);
-    // dispatch(fetchArticles(publisher.id));
-  };
-  console.log(articles, "articles");
+
+  console.log(latestArticles, "latest");
+
   const scrollRight = () => {
     blogSect.current.scrollBy({
       left: -700,
@@ -29,6 +30,7 @@ function LatestNews() {
       behavior: "smooth",
     });
   };
+
   return (
     <section className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto py-12 flex-col flex gap-8 relative">
       <h2 className="text-3xl font-bold text-gray-900">Latest News</h2>
@@ -50,7 +52,7 @@ function LatestNews() {
         ref={blogSect}
         className="flex ease-in-out duration-500 max-w-full overflow-x-hidden w-full"
       >
-        {NEWS.map((item) => {
+        {latestArticles.map((item) => {
           return <NewsCard key={item.id} item={item} />;
         })}
       </div>
