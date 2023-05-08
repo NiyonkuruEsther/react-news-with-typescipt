@@ -15,16 +15,6 @@ function HeroSection() {
             The latest news from around the world delivered to you in real-time.
           </p>
         </div>
-        <ReactContentLoader
-          speed={2}
-          height={350}
-          viewBox="0 0 400 350"
-          backgroundColor="#dedede"
-          foregroundColor="#f5f5f5"
-          className="max-w-sm"
-        >
-          <rect x="3" y="3" rx="10" ry="10" width="400" height="345" />
-        </ReactContentLoader>
       </div>
     </div>
   );

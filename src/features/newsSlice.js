@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
+const API_KEY = "51c2b05805f84a918235842524492417";
 
 const initialArticlesState = {
   articles: [],
@@ -16,7 +16,7 @@ export const fetchArticles = createAsyncThunk(
         `https://news-proxy.netlify.app/api/everything${
           publisher
             ? `?sources=${publisher.id}&apiKey=${API_KEY}`
-            : `&apiKey=${API_KEY}`
+            : `?sources=abc-news&apiKey=${API_KEY}`
         }`
       );
       if (!response.ok) {

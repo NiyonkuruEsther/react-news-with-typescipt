@@ -15,8 +15,6 @@ function LatestNews() {
     dispatch(fetchLatestArticles());
   }, [dispatch]);
 
-  console.log(latestArticles, "latest");
-
   const scrollRight = () => {
     blogSect.current.scrollBy({
       left: -700,
@@ -52,8 +50,8 @@ function LatestNews() {
         ref={blogSect}
         className="flex ease-in-out duration-500 max-w-full overflow-x-hidden w-full"
       >
-        {latestArticles.map((item) => {
-          return <NewsCard key={item.id} item={item} />;
+        {latestArticles.map((item, index) => {
+          return <NewsCard key={index} item={item} />;
         })}
       </div>
     </section>
