@@ -11,14 +11,17 @@ const initialArticlesState = {
 export const fetchArticles = createAsyncThunk(
   "articles/fetchArticles",
   async (publisher) => {
+    let url;
+    if (typeof publisher === "object") {
+      url = `https://news-proxy.netlify.app/api/everything?sources=${publisher.id}&apiKey=${API_KEY}`;
+    } else if (typeof publisher === "string" && publisher !== "") {
+      url = `https://news-proxy.netlify.app/api/everything?q=${publisher}&apiKey=${API_KEY}`;
+    } else {
+      url = `https://news-proxy.netlify.app/api/everything?sources=abc-news&apiKey=${API_KEY}`;
+    }
+
     try {
-      const response = await fetch(
-        `https://news-proxy.netlify.app/api/everything${
-          publisher
-            ? `?sources=${publisher.id}&apiKey=${API_KEY}`
-            : `?sources=abc-news&apiKey=${API_KEY}`
-        }`
-      );
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to fetch articles");
       }

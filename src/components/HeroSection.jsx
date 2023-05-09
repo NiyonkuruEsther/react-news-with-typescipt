@@ -1,5 +1,4 @@
 import React from "react";
-import ReactContentLoader from "react-content-loader";
 
 function HeroSection() {
   return (
