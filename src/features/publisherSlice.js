@@ -1,7 +1,7 @@
 // publishersSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const API_KEY = "51c2b05805f84a918235842524492417";
+const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
 const initialPublishersState = {
   publishers: [],
