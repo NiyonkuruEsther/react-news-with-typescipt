@@ -22,7 +22,7 @@ const Publisher = ({ onPublisherChange }) => {
 
   return (
     <div className="flex flex-col gap-8 w-full items-center justify-center">
-      {publishers.length > 0 && (
+      {publishers?.length > 0 && (
         <div className="grid gap-3 ">
           {publishers.slice(0, 5).map((publisher) => (
             <div key={publisher.id}>
