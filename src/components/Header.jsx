@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaBars, FaSearch } from "react-icons/fa";
 import Logo from "../assets/Logo.svg";
 import { RxCross1 } from "react-icons/rx";
 import { BsSearch } from "react-icons/bs";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchArticles,
@@ -26,8 +25,6 @@ function Header() {
       window.removeEventListener("scroll", changeScrolled);
     };
   }, []);
-  console.log(searchKeyword);
-
   const handleSearchClick = () => {
     setTabValue(true);
   };

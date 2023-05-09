@@ -42,5 +42,4 @@ export const publishersSlice = createSlice({
   },
 });
 
-export const {} = publishersSlice.actions;
 export const selectPublishers = (state) => state.publishers;

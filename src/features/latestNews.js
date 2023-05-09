@@ -19,7 +19,6 @@ export const fetchLatestArticles = createAsyncThunk(
         throw new Error("Failed to fetch articles");
       }
       const data = await response.json();
-      console.log(data.articles, "lat");
       return data.articles;
     } catch (error) {
       throw error;
@@ -47,7 +46,4 @@ export const LatestArticlesSlice = createSlice({
   },
 });
 
-console.log(initialArticlesState.latest, "article fds");
-
-export const {} = LatestArticlesSlice.actions;
 export const selectLatestArticles = (state) => state.articles.latest;

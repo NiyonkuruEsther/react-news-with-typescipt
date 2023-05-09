@@ -1,11 +1,10 @@
 import Publisher from "./Publisher";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   fetchArticles,
   selectArticlesByPublisher,
 } from "../features/newsSlice";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const NewsAndPublishers = () => {
@@ -21,8 +20,6 @@ const NewsAndPublishers = () => {
     dispatch(fetchArticles(selectedPublisher));
   }, [dispatch, selectedPublisher]);
   const articles = useSelector(selectArticlesByPublisher);
-
-  console.log(selectedPublisher, "Selected", articles, "sdjfskdfdslkf");
   return (
     <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto py-12 flex-col flex gap-8 ">
       <div className="w-full grid grid-cols-12 gap-28">

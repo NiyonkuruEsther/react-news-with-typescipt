@@ -1,29 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchArticles,
   selectArticlesByPublisher,
 } from "../features/newsSlice";
 import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
-import { useEffect } from "react";
-
 function News() {
   const dispatch = useDispatch();
   const articles = useSelector(selectArticlesByPublisher).articles || {};
   const { publishers } = useSelector(selectPublishers);
-  console.log(publishers, "mafresheru");
   useEffect(() => {
     dispatch(fetchPublishers());
   }, [dispatch]);
 
   const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
-  // const [showAllPublishers, setShowAllPublishers] = useState(false);
 
   const handlePublisherChange = (publisher) => {
     setSelectedPublisher(publisher);
     dispatch(fetchArticles(publisher.id));
   };
-  // const memoizedPublishers = useMemo(() => publishers, [publishers]);
 
   const selectedArticles = selectedPublisher
     ? articles[selectedPublisher.id] || []
