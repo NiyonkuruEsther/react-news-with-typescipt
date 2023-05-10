@@ -22,10 +22,10 @@ const NewsAndPublishers = () => {
   const articles = useSelector(selectArticlesByPublisher);
   return (
     <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 overflow-hidden px-10 mx-auto py-12 flex-col flex gap-8 ">
-      <div className="w-full grid lg:grid-cols-10 xl:grid-cols-12 gap-12 lg:gap-28">
-        <div className="lg:col-span-7 order-2 lg:order-first xl:col-span-10">
+      <div className="w-full grid xl:grid-cols-12 gap-12 px-6">
+        <div className="order-2 lg:order-first lg:col-span-9">
           {selectedPublisher ? (
-            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div className="grid xl:grid-cols-3 gap-4">
               {articles.length > 0 &&
                 articles.map((item) => (
                   <Link
