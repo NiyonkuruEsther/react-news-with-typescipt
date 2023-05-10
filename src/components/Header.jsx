@@ -44,7 +44,7 @@ function Header() {
   return (
     <header
       className={`bg-white shadow-sm relative w-full ${tabValue ? "" : ""} ${
-        scrolled ? "sticky top-0 z-50" : ""
+        scrolled ? "sticky top-0 z-[1000]" : ""
       }`}
     >
       <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto py-2 flex items-center justify-between">
@@ -63,13 +63,13 @@ function Header() {
       </div>
       {tabValue && (
         <div
-          className={`bg-white fixed  ${
+          className={`bg-white sticky ${
             tabValue
               ? "h-screen w-screen flex items-center justify-center z-50"
               : "hidden"
           }`}
         >
-          <div className="max-w-3xl w-full flex absolute top-0 items-center">
+          <div className="max-w-3xl w-3/4 lg:w-full flex absolute top-0 items-center">
             <div className="border h-fit flex justify-between items-center w-full  border-neutral-300 rounded-md ring ring-black p-2 flex-1">
               <input
                 onChange={handleSearchChange}

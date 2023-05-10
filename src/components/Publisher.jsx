@@ -21,9 +21,9 @@ const Publisher = ({ onPublisherChange }) => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col gap-8 w-full items-center justify-center">
+    <div className="flex flex-wrap lg:flex-col gap-8 w-full items-center justify-center">
       {publishers?.length > 0 && (
-        <div className="grid gap-3 ">
+        <div className="flex flex-wrap lg:grid gap-3 ">
           {publishers.slice(0, 5).map((publisher) => (
             <div key={publisher.id}>
               <button
@@ -43,7 +43,7 @@ const Publisher = ({ onPublisherChange }) => {
         <BsArrowDown className="text-3xl" />
       </button>
       {publishers?.length > 5 && showAllPublishers && (
-        <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed z-[10000000] inset-0 h-max overflow-y-scroll bg-gray-700 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-4 rounded-md shadow-lg">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-bold">All Publishers</h2>
@@ -54,7 +54,7 @@ const Publisher = ({ onPublisherChange }) => {
                 Close
               </button>
             </div>
-            <div className="grid grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 w-full md:grid-cols-3 lg:grid-cols-6 gap-3 ">
               {publishers?.map((publisher) => (
                 <button
                   key={publisher.id}
