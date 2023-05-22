@@ -1,4 +1,3 @@
-import React from "react";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import Logo from "../assets/Logo2.svg";
 
