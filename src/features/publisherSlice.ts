@@ -3,7 +3,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const API_KEY: string = "51c2b05805f84a918235842524492417";
 
-const initialPublishersState = {
+interface PublisherType {
+  publishers: string[];
+  status: string;
+  error: null;
+}
+
+const initialPublishersState: PublisherType = {
   publishers: [],
   status: "idle",
   error: null,
