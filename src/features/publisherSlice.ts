@@ -23,7 +23,7 @@ export const fetchPublishers = createAsyncThunk(
     );
     const data = await response.json();
     return data.sources;
-  }
+  } 
 );
 
 // console.log(initialPublishersState.publishers, "data");

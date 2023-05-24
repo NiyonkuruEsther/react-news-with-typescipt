@@ -7,6 +7,7 @@ import {
   FaFutbol,
 } from "react-icons/fa";
 import { fetchPublishers } from "../features/publisherSlice";
+import { Item } from "../data/types";
 
 function CategoriesSection() {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function CategoriesSection() {
     },
   ];
 
-  const handleCategoryClick = (categoryName) => {
+  const handleCategoryClick = (categoryName: string): void => {
     dispatch(fetchPublishers(categoryName.toLowerCase()));
   };
 
@@ -53,7 +54,7 @@ function CategoriesSection() {
       <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 px-10 mx-auto">
         <h2 className="text-3xl font-bold text-gray-900">Categories</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
-          {categories.map((item, index) => (
+          {categories.map((item: Item) => (
             <button
               key={item.id}
               className={`p-4 flex items-center gap-8 justify-center rounded-lg shadow-md hover:shadow-lg transform transition duration-200 hover:-translate-y-1 bg-gradient-to-r ${item.color}`}
