@@ -1,5 +1,5 @@
 // publishersSlice.js
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const API_KEY: string = "51c2b05805f84a918235842524492417";
 
@@ -23,7 +23,7 @@ export const fetchPublishers = createAsyncThunk(
     );
     const data = await response.json();
     return data.sources;
-  } 
+  }
 );
 
 // console.log(initialPublishersState.publishers, "data");
@@ -32,20 +32,26 @@ export const publishersSlice = createSlice({
   name: "publishers",
   initialState: initialPublishersState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: (builder: any) => {
     builder
-      .addCase(fetchPublishers.pending, (state) => {
+      .addCase(fetchPublishers.pending, (state: any) => {
         state.status = "loading";
       })
-      .addCase(fetchPublishers.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.publishers = action.payload;
-      })
-      .addCase(fetchPublishers.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      });
+      .addCase(
+        fetchPublishers.fulfilled,
+        (state: any, action: PayloadAction<object>) => {
+          state.status = "succeeded";
+          state.publishers = action.payload;
+        }
+      )
+      .addCase(
+        fetchPublishers.rejected,
+        (state: any, action: PayloadAction<object>) => {
+          state.status = "failed";
+          state.error = action.error.message;
+        }
+      );
   },
 });
 
-export const selectPublishers = (state) => state.publishers;
+export const selectPublishers = (state: any) => state.publishers;
