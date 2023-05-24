@@ -1,15 +1,14 @@
 // publishersSlice.js
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { StateType } from "../data/types";
 
 const API_KEY: string = "51c2b05805f84a918235842524492417";
 
-interface PublisherType {
+interface PubliserStateType extends StateType {
   publishers: string[];
-  status: string;
-  error: null;
 }
 
-const initialPublishersState: PublisherType = {
+const initialPublishersState: PubliserStateType = {
   publishers: [],
   status: "idle",
   error: null,
@@ -48,7 +47,7 @@ export const publishersSlice = createSlice({
         fetchPublishers.rejected,
         (state: any, action: PayloadAction<object>) => {
           state.status = "failed";
-          state.error = action.error.message;
+          state.error = action?.error?.message;
         }
       );
   },

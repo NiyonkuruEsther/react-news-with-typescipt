@@ -1,8 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { StateType } from "../data/types";
 
 const API_KEY = "51c2b05805f84a918235842524492417";
 
-const initialArticlesState = {
+interface LatestStateType extends StateType {
+  latest: string[];
+}
+
+const initialArticlesState: LatestStateType = {
   latest: [],
   status: "idle",
   error: null,
