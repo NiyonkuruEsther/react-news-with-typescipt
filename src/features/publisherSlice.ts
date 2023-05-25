@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { StateType } from "../data/types";
 
-const API_KEY: string = "51c2b05805f84a918235842524492417";
+const API_KEY: string = "f3a45a464fe34f2b9249a2d9a6b5be2a";
 
 interface PubliserStateType extends StateType {
   publishers: string[];
@@ -16,18 +16,15 @@ const initialPublishersState: PubliserStateType = {
 
 export const fetchPublishers = createAsyncThunk(
   "publishers/fetchPublishers",
-  async (category: string = "general") => {
+  async (category: string) => {
     const response = await fetch(
       `https://news-proxy.netlify.app/api/top-headlines/sources?category=${category}&apiKey=${API_KEY}`
     );
     const data = await response.json();
-    console.log(data.sources, "data logged");
 
     return data.sources;
   }
 );
-
-// console.log(initialPublishersState.publishers, "data");
 
 export const publishersSlice = createSlice({
   name: "publishers",

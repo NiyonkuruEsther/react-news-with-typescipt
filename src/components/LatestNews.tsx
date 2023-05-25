@@ -3,13 +3,17 @@ import NewsCard from "./NewsCard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestArticles } from "../features/latestNews";
-import { ReferenceType } from "../data/types";
+import { ItemWithImage, ReferenceType } from "../data/types";
+
+interface ItemType extends ItemWithImage {
+  source: { name?: string };
+}
 
 function LatestNews() {
   const dispatch = useDispatch();
 
   const blogSect: ReferenceType = useRef(null);
-  const latestArticles: object = useSelector(
+  const latestArticles: [] = useSelector(
     (state) => state.latestArticles.latest
   );
 
@@ -53,8 +57,8 @@ function LatestNews() {
         ref={blogSect}
         className="flex ease-in-out duration-500 max-w-full overflow-x-hidden w-full"
       >
-        {latestArticles.map((item, index) => {
-          return <NewsCard key={index} item={item} />;
+        {latestArticles.map((item: ItemType, index: number) => {
+          return <NewsCard key={index} {...item} />;
         })}
       </div>
     </section>

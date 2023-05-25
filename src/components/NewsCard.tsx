@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import { ItemWithImage } from "../data/types";
 
-function NewsCard({ item }) {
-  console.log(item.urlToImage);
+interface ItemType extends ItemWithImage {
+  source: { name?: string };
+}
+
+function NewsCard(item: ItemType) {
   return (
     <Link
       to={`/news-details/${item.title}`}

@@ -6,7 +6,7 @@ import {
   selectArticlesByPublisher,
 } from "../features/newsSlice";
 import { Link } from "react-router-dom";
-import { Item, ItemWithImage } from "../data/types";
+import { ItemWithImage } from "../data/types";
 
 const NewsAndPublishers = () => {
   const [selectedPublisher, setSelectedPublisher] = useState<object>({});
@@ -18,11 +18,12 @@ const NewsAndPublishers = () => {
   );
 
   const dispatch = useDispatch();
-  // console.log(publisher, "logging");
+  // console.log(handlePublisherChange, "logging");
 
   useEffect(() => {
-    dispatch(fetchArticles(selectedPublisher));
+    dispatch<any>(fetchArticles());
   }, [dispatch, selectedPublisher]);
+  
   const articles = useSelector(selectArticlesByPublisher);
   return (
     <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 overflow-hidden px-10 mx-auto py-12 flex-col flex gap-8 ">

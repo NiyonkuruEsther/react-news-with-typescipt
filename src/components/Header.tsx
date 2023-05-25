@@ -34,7 +34,7 @@ function Header() {
   };
 
   useEffect(() => {
-    dispatch(fetchArticles(searchValue));
+    dispatch<any>(fetchArticles(searchValue));
   }, [dispatch, searchValue]);
 
   const handleSearchChange = (e: object | any) => {

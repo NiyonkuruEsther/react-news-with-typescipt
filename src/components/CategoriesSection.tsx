@@ -46,7 +46,7 @@ function CategoriesSection() {
   ];
 
   const handleCategoryClick = (categoryName: string): void => {
-    dispatch(fetchPublishers(categoryName.toLowerCase()));
+    dispatch<any>(fetchPublishers(categoryName.toLowerCase()));
   };
 
   return (

@@ -1,8 +1,14 @@
 import { useLocation } from "react-router-dom";
+import { ItemWithImage } from "../data/types";
+
+interface ItemType extends ItemWithImage {
+  url: string;
+  source: { name: string };
+}
 
 function NewsDetails() {
   const location = useLocation();
-  const item = location.state?.item;
+  const item: ItemType = location.state?.item;
 
   return (
     <div className="m-4 pb-4 md:w-[70%] mx-auto shadow-medium h-full rounded-[4px] border border-[#E6E6E6] bg-white">

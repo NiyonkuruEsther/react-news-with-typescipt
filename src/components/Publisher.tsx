@@ -3,13 +3,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
 import { BsArrowDown } from "react-icons/bs";
 
-const Publisher = ({ onPublisherChange }) => {
+type OnPublisherChangeType = (publisher: PublisherType) => void;
+
+type OnPublisherChangeFunctionType = (
+  callback: OnPublisherChangeType | object
+) => void;
+
+type PublisherProps = {
+  onPublisherChange: OnPublisherChangeFunctionType;
+};
+
+interface PublisherType {
+  id: string;
+  name: string;
+}
+
+const Publisher = ({ onPublisherChange }: PublisherProps) => {
   const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
   const [showAllPublishers, setShowAllPublishers] = useState(false);
   const dispatch = useDispatch();
   const { publishers } = useSelector(selectPublishers);
 
-  const handlePublisherChange = (publisher) => {
+  const handlePublisherChange = (publisher: PublisherType) => {
     setSelectedPublisher(publisher.id);
     if (onPublisherChange) {
       onPublisherChange(publisher);
@@ -17,14 +32,14 @@ const Publisher = ({ onPublisherChange }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchPublishers());
+    dispatch<any>(fetchPublishers("general"));
   }, [dispatch]);
 
   return (
     <div className="flex flex-wrap lg:flex-col gap-8 w-full items-center justify-center">
       {publishers?.length > 0 && (
         <div className="flex flex-wrap lg:grid gap-3 ">
-          {publishers.slice(0, 5).map((publisher) => (
+          {publishers.slice(0, 5).map((publisher: PublisherType) => (
             <div key={publisher.id}>
               <button
                 className="bg-blue-400 p-2 ring-4 w-full rounded-md ring-blue-700 whitespace-nowrap"
@@ -55,7 +70,7 @@ const Publisher = ({ onPublisherChange }) => {
               </button>
             </div>
             <div className="grid grid-cols-2 w-full md:grid-cols-3 lg:grid-cols-6 gap-3 ">
-              {publishers?.map((publisher) => (
+              {publishers?.map((publisher: PublisherType) => (
                 <button
                   key={publisher.id}
                   className={`p-2 rounded-md ${

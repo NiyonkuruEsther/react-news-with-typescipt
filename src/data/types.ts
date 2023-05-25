@@ -5,11 +5,11 @@ export type Item = {
   color: String;
 };
 
-export type ItemWithImage = {
+export interface ItemWithImage {
   title: string;
   urlToImage: string;
   content: string;
-};
+}
 
 export interface StateType {
   status: string;
