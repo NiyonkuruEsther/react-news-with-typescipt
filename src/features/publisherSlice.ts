@@ -1,5 +1,5 @@
 // publishersSlice.js
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { StateType } from "../data/types";
 
 const API_KEY: string = "51c2b05805f84a918235842524492417";
@@ -21,6 +21,8 @@ export const fetchPublishers = createAsyncThunk(
       `https://news-proxy.netlify.app/api/top-headlines/sources?category=${category}&apiKey=${API_KEY}`
     );
     const data = await response.json();
+    console.log(data.sources, "data logged");
+
     return data.sources;
   }
 );
@@ -38,18 +40,15 @@ export const publishersSlice = createSlice({
       })
       .addCase(
         fetchPublishers.fulfilled,
-        (state: any, action: PayloadAction<object>) => {
+        (state: any, action: object | any) => {
           state.status = "succeeded";
           state.publishers = action.payload;
         }
       )
-      .addCase(
-        fetchPublishers.rejected,
-        (state: any, action: PayloadAction<object>) => {
-          state.status = "failed";
-          state.error = action?.error?.message;
-        }
-      );
+      .addCase(fetchPublishers.rejected, (state: any, action: object | any) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 

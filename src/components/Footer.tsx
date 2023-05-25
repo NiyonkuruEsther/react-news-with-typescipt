@@ -18,7 +18,7 @@ function Footer() {
             target="_blank"
             rel="noreferrer"
           >
-            <FaFacebook />{" "}
+            <FaFacebook />
           </a>
           <a
             href="#"
@@ -26,7 +26,7 @@ function Footer() {
             target="_blank"
             rel="noreferrer"
           >
-            <FaTwitter />{" "}
+            <FaTwitter />
           </a>
           <a
             href="#"
@@ -34,7 +34,7 @@ function Footer() {
             target="_blank"
             rel="noreferrer"
           >
-            <FaInstagram />{" "}
+            <FaInstagram />
           </a>
         </div>
       </div>

@@ -6,15 +6,19 @@ import {
   selectArticlesByPublisher,
 } from "../features/newsSlice";
 import { Link } from "react-router-dom";
+import { Item, ItemWithImage } from "../data/types";
 
 const NewsAndPublishers = () => {
-  const [selectedPublisher, setSelectedPublisher] = useState(null);
-  const handlePublisherChange = (publisher) => {
+  const [selectedPublisher, setSelectedPublisher] = useState<object>({});
+  const handlePublisherChange = (publisher: object) => {
     setSelectedPublisher(publisher);
   };
-  const latestArticles = useSelector((state) => state.latestArticles.latest);
+  const latestArticles = useSelector(
+    (state: any) => state.latestArticles.latest
+  );
 
   const dispatch = useDispatch();
+  // console.log(publisher, "logging");
 
   useEffect(() => {
     dispatch(fetchArticles(selectedPublisher));
@@ -27,11 +31,11 @@ const NewsAndPublishers = () => {
           {selectedPublisher ? (
             <div className="grid xl:grid-cols-3 gap-4">
               {articles.length > 0 &&
-                articles.map((item) => (
+                articles.map((item: ItemWithImage, index: number) => (
                   <Link
                     to={`/news-details/${item.title}`}
                     state={{ item }}
-                    key={item.title}
+                    key={index}
                     className="mb-3  flex justify-between flex-col hover:bg-blue-950 hover:ring-8 hover:ring-white shadow-medium hover:cursor-pointer duration-500 group flex-shrink-0 mr-4 rounded-[4px] border border-[#E6E6E6] bg-white"
                   >
                     {item.urlToImage !== null && (
@@ -56,7 +60,7 @@ const NewsAndPublishers = () => {
             </div>
           ) : (
             <div className="xl:grid-cols-3 lg:grid-cols-2  grid">
-              {latestArticles.slice(0, 9).map((item) => {
+              {latestArticles.slice(0, 9).map((item: ItemWithImage) => {
                 return (
                   <Link
                     key={item.title}

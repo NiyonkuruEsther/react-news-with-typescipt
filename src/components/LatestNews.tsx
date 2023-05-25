@@ -3,12 +3,15 @@ import NewsCard from "./NewsCard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestArticles } from "../features/latestNews";
+import { ReferenceType } from "../data/types";
 
 function LatestNews() {
   const dispatch = useDispatch();
 
-  const blogSect = useRef(null);
-  const latestArticles = useSelector((state) => state.latestArticles.latest);
+  const blogSect: ReferenceType = useRef(null);
+  const latestArticles: object = useSelector(
+    (state) => state.latestArticles.latest
+  );
 
   // Dispatch the action to fetch latest articles on component mount
   useEffect(() => {

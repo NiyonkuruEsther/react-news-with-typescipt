@@ -11,10 +11,10 @@ import {
 import SearchArticles from "./SearchArticles";
 
 function Header() {
-  const [tabValue, setTabValue] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const searchKeyword = useSelector(selectArticlesByPublisher);
+  const [tabValue, setTabValue] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const searchKeyword: string = useSelector(selectArticlesByPublisher);
   const dispatch = useDispatch();
   useEffect(() => {
     const changeScrolled = () => {
@@ -37,7 +37,7 @@ function Header() {
     dispatch(fetchArticles(searchValue));
   }, [dispatch, searchValue]);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: object | any) => {
     setSearchValue(e.target.value);
   };
 
