@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { ItemWithImage } from "../data/types";
+import { ItemWithImage } from "../types/models/types";
 
 interface ItemType extends ItemWithImage {
   url: string;

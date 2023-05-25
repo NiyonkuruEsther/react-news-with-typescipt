@@ -19,3 +19,14 @@ export interface StateType {
 export type ReferenceType = {
   current: any;
 };
+
+export interface ArticlesType {
+  source: { id: null | string; name: string };
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  title: string;
+  url: string;
+  urlToImage: string;
+}

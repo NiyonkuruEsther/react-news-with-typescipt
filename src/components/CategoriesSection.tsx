@@ -7,7 +7,7 @@ import {
   FaFutbol,
 } from "react-icons/fa";
 import { fetchPublishers } from "../features/publisherSlice";
-import { Item } from "../data/types";
+import { Item } from "../types/models/types";
 
 function CategoriesSection() {
   const dispatch = useDispatch();

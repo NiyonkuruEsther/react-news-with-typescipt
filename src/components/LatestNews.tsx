@@ -3,7 +3,7 @@ import NewsCard from "./NewsCard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestArticles } from "../features/latestNews";
-import { ItemWithImage, ReferenceType } from "../data/types";
+import { ItemWithImage, ReferenceType } from "../types/models/types";
 
 interface ItemType extends ItemWithImage {
   source: { name?: string };

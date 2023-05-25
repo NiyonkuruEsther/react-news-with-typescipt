@@ -1,6 +1,6 @@
 // publishersSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { StateType } from "../data/types";
+import { StateType } from "../types/models/types";
 
 const API_KEY: string = "f3a45a464fe34f2b9249a2d9a6b5be2a";
 
