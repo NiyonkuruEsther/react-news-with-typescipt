@@ -1,10 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { StateType } from "../types/models/types";
+import { ArticlesType, StateType } from "../types/models/types";
 
 const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
 interface ArticleStateType extends StateType {
   articles: string[];
+}
+interface ArticlesState extends StateType {
+  articles: { articles?: string[] };
 }
 
 const initialArticlesState: ArticleStateType = {
@@ -52,7 +55,7 @@ export const articlesSlice = createSlice({
         // slice the news list to pick only 15
         state.articles = action.payload.slice(0, 15);
       })
-      .addCase(fetchArticles.rejected, (state, action) => {
+      .addCase(fetchArticles.rejected, (state: ArticleStateType, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
@@ -62,4 +65,5 @@ export const articlesSlice = createSlice({
 export const {} = articlesSlice.actions;
 
 // This selector now gets the entire articles array from state and uses `.filter` to return only articles with matching publisher.
-export const selectArticlesByPublisher = (state) => state?.articles.articles;
+export const selectArticlesByPublisher = (state: ArticlesState) =>
+  state?.articles.articles;
