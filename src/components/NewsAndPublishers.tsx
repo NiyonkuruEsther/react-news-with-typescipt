@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { ItemWithImage } from "../types/models/types";
 
 const NewsAndPublishers = () => {
-  const [selectedPublisher, setSelectedPublisher] = useState<object>({});
+  const [selectedPublisher, setSelectedPublisher] = useState<object | string>();
   const handlePublisherChange = (publisher: object) => {
     setSelectedPublisher(publisher);
   };
@@ -18,12 +18,11 @@ const NewsAndPublishers = () => {
   );
 
   const dispatch = useDispatch();
-  // console.log(handlePublisherChange, "logging");
+  console.log(typeof selectedPublisher, "logging");
 
   useEffect(() => {
-    dispatch<any>(fetchArticles());
+    dispatch<any>(fetchArticles(selectedPublisher));
   }, [dispatch, selectedPublisher]);
-
   const articles = useSelector(selectArticlesByPublisher);
   return (
     <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 overflow-hidden px-10 mx-auto py-12 flex-col flex gap-8 ">

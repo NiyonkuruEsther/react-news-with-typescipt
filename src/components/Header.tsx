@@ -13,7 +13,7 @@ import SearchArticles from "./SearchArticles";
 function Header() {
   const [tabValue, setTabValue] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string | object>();
   const searchKeyword: string = useSelector(selectArticlesByPublisher);
   const dispatch = useDispatch();
   useEffect(() => {
