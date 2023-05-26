@@ -18,7 +18,7 @@ const NewsAndPublishers = () => {
   );
 
   const dispatch = useDispatch();
-  console.log(typeof selectedPublisher, "logging");
+  // console.log(typeof selectedPublisher, "logging");
 
   useEffect(() => {
     dispatch<any>(fetchArticles(selectedPublisher));

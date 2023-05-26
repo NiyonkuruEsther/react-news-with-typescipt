@@ -4,10 +4,10 @@ import { ArticlesType, StateType } from "../types/models/types";
 const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
 interface ArticleStateType extends StateType {
-  articles: string[];
+  articles: string[] | string;
 }
 interface ArticlesState extends StateType {
-  articles: { articles?: string[] };
+  articles: { articles?: string[] | string | undefined };
 }
 
 const initialArticlesState: ArticleStateType = {

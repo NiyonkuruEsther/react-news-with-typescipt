@@ -14,8 +14,12 @@ function Header() {
   const [tabValue, setTabValue] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string | object>();
-  const searchKeyword: string = useSelector(selectArticlesByPublisher);
+  const searchKeyword: string | undefined = useSelector(
+    selectArticlesByPublisher
+  );
   const dispatch = useDispatch();
+  console.log(searchKeyword);
+
   useEffect(() => {
     const changeScrolled = () => {
       window.scrollY >= 6 ? setScrolled(true) : setScrolled(false);
