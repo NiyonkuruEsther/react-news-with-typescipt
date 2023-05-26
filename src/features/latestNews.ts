@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { StateType } from "../types/models/types";
 
@@ -44,11 +45,11 @@ export const LatestArticlesSlice = createSlice({
         state.status = "succeeded";
         state.latest = action.payload;
       })
-      .addCase(fetchLatestArticles.rejected, (state, action) => {
+      .addCase(fetchLatestArticles.rejected, (state: any, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
   },
 });
 
-export const selectLatestArticles = (state) => state.articles.latest;
+export const selectLatestArticles = (state: any) => state.articles.latest;

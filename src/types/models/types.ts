@@ -2,7 +2,7 @@ export type Item = {
   readonly id: number;
   name: string;
   icon: JSX.Element;
-  color: String;
+  color: string;
 };
 
 export interface ItemWithImage {
@@ -20,13 +20,13 @@ export type ReferenceType = {
   current: any;
 };
 
-export interface ArticlesType {
-  source: { id: null | string; name: string };
+export type ArticlesType = {
   author: string;
   content: string;
   description: string;
   publishedAt: string;
+  source: { id: null | string; name: string | null };
   title: string;
   url: string;
-  urlToImage: string;
-}
+  urlToImage: string | null;
+};

@@ -14,7 +14,7 @@ function LatestNews() {
 
   const blogSect: ReferenceType = useRef(null);
   const latestArticles: [] = useSelector(
-    (state) => state.latestArticles.latest
+    (state: any) => state.latestArticles.latest
   );
 
   // Dispatch the action to fetch latest articles on component mount

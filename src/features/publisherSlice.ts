@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { StateType } from "../types/models/types";
 
-const API_KEY: string = "859502e7ee194c2989ecdaf24a853f82";
+const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
 interface PubliserStateType extends StateType {
   publishers: string[];

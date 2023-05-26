@@ -6,7 +6,7 @@ import {
   selectArticlesByPublisher,
 } from "../features/newsSlice";
 import { Link } from "react-router-dom";
-import { ItemWithImage } from "../types/models/types";
+import { ItemWithImage, ArticlesType } from "../types/models/types";
 
 const NewsAndPublishers = () => {
   const [selectedPublisher, setSelectedPublisher] = useState<object | string>();
@@ -23,19 +23,22 @@ const NewsAndPublishers = () => {
   useEffect(() => {
     dispatch<any>(fetchArticles(selectedPublisher));
   }, [dispatch, selectedPublisher]);
-  const articles = useSelector(selectArticlesByPublisher);
+  const articles: ArticlesType[] = useSelector(selectArticlesByPublisher);
+  console.log(articles, "stressed out");
+
   return (
     <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 overflow-hidden px-10 mx-auto py-12 flex-col flex gap-8 ">
       <div className="w-full grid xl:grid-cols-12 gap-12 px-6">
         <div className="order-2 lg:order-first lg:col-span-9">
           {selectedPublisher ? (
             <div className="grid xl:grid-cols-3 gap-4">
-              {articles.length > 0 &&
-                articles.map((item: ItemWithImage, index: number) => (
+              {articles !== undefined &&
+                articles.length > 0 &&
+                articles.map((item: ArticlesType) => (
                   <Link
                     to={`/news-details/${item.title}`}
                     state={{ item }}
-                    key={index}
+                    key={item.description}
                     className="mb-3  flex justify-between flex-col hover:bg-blue-950 hover:ring-8 hover:ring-white shadow-medium hover:cursor-pointer duration-500 group flex-shrink-0 mr-4 rounded-[4px] border border-[#E6E6E6] bg-white"
                   >
                     {item.urlToImage !== null && (

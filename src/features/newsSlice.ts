@@ -1,13 +1,15 @@
+/* eslint-disable no-empty-pattern */
+/* eslint-disable no-useless-catch */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ArticlesType, StateType } from "../types/models/types";
 
 const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
 interface ArticleStateType extends StateType {
-  articles: string[] | string;
+  articles: number[];
 }
 interface ArticlesState extends StateType {
-  articles: { articles?: string[] | string | undefined };
+  articles: { articles: ArticlesType[] };
 }
 
 const initialArticlesState: ArticleStateType = {
@@ -55,7 +57,7 @@ export const articlesSlice = createSlice({
         // slice the news list to pick only 15
         state.articles = action.payload.slice(0, 15);
       })
-      .addCase(fetchArticles.rejected, (state: ArticleStateType, action) => {
+      .addCase(fetchArticles.rejected, (state: any, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

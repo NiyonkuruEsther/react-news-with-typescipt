@@ -9,14 +9,13 @@ import {
   selectArticlesByPublisher,
 } from "../features/newsSlice";
 import SearchArticles from "./SearchArticles";
+import { ArticlesType } from "../types/models/types";
 
 function Header() {
   const [tabValue, setTabValue] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string | object>();
-  const searchKeyword: string | undefined = useSelector(
-    selectArticlesByPublisher
-  );
+  const searchKeyword: ArticlesType[] = useSelector(selectArticlesByPublisher);
   const dispatch = useDispatch();
   console.log(searchKeyword);
 
@@ -94,7 +93,7 @@ function Header() {
             </div>
           </div>
           <div className="max-w-7xl mx-auto absolute top-[10%] h-screen overflow-y-auto">
-            {searchKeyword.length > 0 && (
+            {searchKeyword !== undefined && searchKeyword.length > 0 && (
               <SearchArticles articles={searchKeyword} />
             )}
           </div>
