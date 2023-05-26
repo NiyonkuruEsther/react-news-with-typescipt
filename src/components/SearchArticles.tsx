@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
+import { ArticlesType } from "../types/models/types";
 
 function SearchArticles({ articles }) {
+  console.log(articles, "logged");
+
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {articles?.map((article) => {
+      {articles?.map((article: ArticlesType) => {
         return (
           <Link
             to={`/news-details/${article.title}`}
