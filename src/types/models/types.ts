@@ -13,7 +13,7 @@ export interface ItemWithImage {
 
 export interface StateType {
   status: string;
-  error: null;
+  error?: null | string;
 }
 
 export type ReferenceType = {

@@ -2,13 +2,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { StateType } from "../types/models/types";
 
-const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
+const API_KEY = "51c2b05805f84a918235842524492417";
 
-interface PubliserStateType extends StateType {
+interface PublisherStateType extends StateType {
   publishers: string[];
 }
 
-const initialPublishersState: PubliserStateType = {
+const initialPublishersState: PublisherStateType = {
   publishers: [],
   status: "idle",
   error: null,
@@ -30,22 +30,25 @@ export const publishersSlice = createSlice({
   name: "publishers",
   initialState: initialPublishersState,
   reducers: {},
-  extraReducers: (builder: any) => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchPublishers.pending, (state: any) => {
+      .addCase(fetchPublishers.pending, (state) => {
         state.status = "loading";
       })
       .addCase(
         fetchPublishers.fulfilled,
-        (state: any, action: object | any) => {
+        (state: PublisherStateType, action ) => {
           state.status = "succeeded";
           state.publishers = action.payload;
         }
       )
-      .addCase(fetchPublishers.rejected, (state: any, action: object | any) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      });
+      .addCase(
+        fetchPublishers.rejected,
+        (state: PublisherStateType, action) => {
+          state.status = "failed";
+          state.error = action.error.message;
+        }
+      );
   },
 });
 

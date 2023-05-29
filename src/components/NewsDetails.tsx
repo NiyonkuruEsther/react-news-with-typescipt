@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ItemWithImage } from "../types/models/types";
 
 interface ItemType extends ItemWithImage {
@@ -30,11 +30,11 @@ function NewsDetails() {
             Read More
           </button>
         </a>
-        <a href="/" className="m-4 ">
+        <Link to="/" className="m-4 ">
           <button className="bg-gray-200 ring-2 ring-gray-400 rounded-md h-fit p-4">
             Go back
           </button>
-        </a>
+        </Link>
       </div>
     </div>
   );
