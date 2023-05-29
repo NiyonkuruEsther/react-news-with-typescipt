@@ -10,13 +10,14 @@ import {
 } from "../features/newsSlice";
 import SearchArticles from "./SearchArticles";
 import { ArticlesType } from "../types/models/types";
+import { Dispatch } from "redux";
 
 function Header() {
   const [tabValue, setTabValue] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string | object>();
   const searchKeyword: ArticlesType[] = useSelector(selectArticlesByPublisher);
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<any> = useDispatch();
   console.log(searchKeyword);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function Header() {
   };
 
   useEffect(() => {
-    dispatch<any>(fetchArticles(searchValue));
+    dispatch(fetchArticles(searchValue));
   }, [dispatch, searchValue]);
 
   const handleSearchChange = (e: object | any) => {

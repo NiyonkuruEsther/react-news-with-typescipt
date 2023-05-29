@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { publishersSlice } from "./features/publisherSlice";
 import { articlesSlice } from "./features/newsSlice";
 import { LatestArticlesSlice } from "./features/latestNews";

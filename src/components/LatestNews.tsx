@@ -4,17 +4,18 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLatestArticles } from "../features/latestNews";
 import { ItemWithImage, ReferenceType } from "../types/models/types";
+import { AnyAction, Dispatch } from "redux";
 
 interface ItemType extends ItemWithImage {
   source: { name?: string };
 }
 
 function LatestNews() {
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<any> = useDispatch();
 
   const blogSect: ReferenceType = useRef(null);
   const latestArticles: [] = useSelector(
-    (state: any) => state.latestArticles.latest
+    (state: { latestArticles: { latest: [] } }) => state.latestArticles.latest
   );
 
   // Dispatch the action to fetch latest articles on component mount

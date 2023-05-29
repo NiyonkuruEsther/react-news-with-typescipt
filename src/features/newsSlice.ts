@@ -1,5 +1,3 @@
-/* eslint-disable no-empty-pattern */
-/* eslint-disable no-useless-catch */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ArticlesType, StateType } from "../types/models/types";
 
@@ -30,16 +28,9 @@ export const fetchArticles = createAsyncThunk(
       url = `https://news-proxy.netlify.app/api/everything?sources=abc-news&apiKey=${API_KEY}`;
     }
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Failed to fetch articles");
-      }
-      const data = await response.json();
-      return data.articles;
-    } catch (error) {
-      throw error;
-    }
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.articles;
   }
 );
 
@@ -64,7 +55,7 @@ export const articlesSlice = createSlice({
   },
 });
 
-export const {} = articlesSlice.actions;
+// export const {} = articlesSlice.actions;
 
 // This selector now gets the entire articles array from state and uses `.filter` to return only articles with matching publisher.
 export const selectArticlesByPublisher = (state: ArticlesState) =>
