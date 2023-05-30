@@ -7,11 +7,17 @@ const API_KEY = "51c2b05805f84a918235842524492417";
 interface LatestStateType extends StateType {
   latest: string[];
 }
-
+export interface LatestArticlesRootState {
+  latest: LatestStateType;
+}
 const initialArticlesState: LatestStateType = {
   latest: [],
   status: "idle",
   error: null,
+};
+
+export type latestType = {
+  articles: { latest: [] };
 };
 
 export const fetchLatestArticles = createAsyncThunk(
@@ -45,11 +51,12 @@ export const LatestArticlesSlice = createSlice({
         state.status = "succeeded";
         state.latest = action.payload;
       })
-      .addCase(fetchLatestArticles.rejected, (state: any, action) => {
+      .addCase(fetchLatestArticles.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
   },
 });
 
-export const selectLatestArticles = (state: any) => state.articles.latest;
+export const selectLatestArticles = (state: latestType) =>
+  state.articles.latest;

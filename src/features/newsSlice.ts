@@ -9,6 +9,9 @@ interface ArticleStateType extends StateType {
 interface ArticlesState extends StateType {
   articles: { articles: ArticlesType[] };
 }
+export interface ArticlesRootState {
+  articles: ArticleStateType;
+}
 
 const initialArticlesState: ArticleStateType = {
   articles: [],
@@ -48,14 +51,12 @@ export const articlesSlice = createSlice({
         // slice the news list to pick only 15
         state.articles = action.payload.slice(0, 15);
       })
-      .addCase(fetchArticles.rejected, (state: any, action) => {
+      .addCase(fetchArticles.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
   },
 });
-
-// export const {} = articlesSlice.actions;
 
 export const selectArticlesByPublisher = (state: ArticlesState) =>
   state?.articles.articles;

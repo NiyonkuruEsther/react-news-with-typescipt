@@ -7,14 +7,16 @@ const API_KEY = "51c2b05805f84a918235842524492417";
 interface PublisherStateType extends StateType {
   publishers: string[];
 }
-
+export interface PublishersRootState {
+  publishers: PublisherStateType;
+}
 const initialPublishersState: PublisherStateType = {
   publishers: [],
   status: "idle",
   error: null,
 };
 
-export const fetchPublishers = createAsyncThunk(
+export const fetchPublishers = createAsyncThunk<string[], string>(
   "publishers/fetchPublishers",
   async (category: string) => {
     const response = await fetch(
@@ -37,7 +39,7 @@ export const publishersSlice = createSlice({
       })
       .addCase(
         fetchPublishers.fulfilled,
-        (state: PublisherStateType, action ) => {
+        (state: PublisherStateType, action) => {
           state.status = "succeeded";
           state.publishers = action.payload;
         }
@@ -52,4 +54,5 @@ export const publishersSlice = createSlice({
   },
 });
 
-export const selectPublishers = (state: any) => state.publishers;
+export const selectPublishers = (state: { publishers: { publishers: [] } }) =>
+  state.publishers.publishers;

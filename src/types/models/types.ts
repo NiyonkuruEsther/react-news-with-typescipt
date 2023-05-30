@@ -1,3 +1,5 @@
+import { Action } from "redux";
+
 export type Item = {
   readonly id: number;
   name: string;
@@ -17,7 +19,7 @@ export interface StateType {
 }
 
 export type ReferenceType = {
-  current: any;
+  current: object;
 };
 
 export type ArticlesType = {
@@ -30,3 +32,7 @@ export type ArticlesType = {
   url: string;
   urlToImage: string | null;
 };
+
+export interface FetchPublishersAction extends Action<string> {
+  payload: string[];
+}

@@ -2,18 +2,22 @@ import { useEffect, useRef } from "react";
 import NewsCard from "./NewsCard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLatestArticles } from "../features/latestNews";
+import {
+  LatestArticlesRootState,
+  fetchLatestArticles,
+} from "../features/latestNews";
 import { ItemWithImage, ReferenceType } from "../types/models/types";
 import { AnyAction, Dispatch } from "redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
 
 interface ItemType extends ItemWithImage {
   source: { name?: string };
 }
 
 function LatestNews() {
-  const dispatch: Dispatch<any> = useDispatch();
-
-  const blogSect: ReferenceType = useRef(null);
+  const dispatch: ThunkDispatch<LatestArticlesRootState, undefined, AnyAction> =
+    useDispatch();
+  const blogSect = useRef<HTMLDivElement>(null);
   const latestArticles: [] = useSelector(
     (state: { latestArticles: { latest: [] } }) => state.latestArticles.latest
   );

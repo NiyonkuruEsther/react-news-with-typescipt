@@ -4,23 +4,29 @@ import { useState, useEffect } from "react";
 import { fetchArticles } from "../features/newsSlice";
 import { Link } from "react-router-dom";
 import { ItemWithImage, ArticlesType } from "../types/models/types";
+import { LatestArticlesRootState } from "../features/latestNews";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
 const NewsAndPublishers = () => {
-  const [selectedPublisher, setSelectedPublisher] = useState<any>();
-  const handlePublisherChange = (publisher: object) => {
+  const [selectedPublisher, setSelectedPublisher] = useState<
+    string | { id: string }
+  >("");
+  const handlePublisherChange = (publisher: string | { id: string }) => {
     setSelectedPublisher(publisher);
   };
+
   const latestArticles = useSelector(
-    (state: any) => state.latestArticles.latest
+    (state: { latestArticles: { latest: [] } }) => state.latestArticles.latest
   );
 
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<LatestArticlesRootState, undefined, AnyAction> =
+    useDispatch();
 
   useEffect(() => {
-    dispatch<any>(fetchArticles(selectedPublisher));
+    dispatch(fetchArticles(selectedPublisher));
   }, [dispatch, selectedPublisher]);
   const articles: ArticlesType[] = useSelector(
-    (state: any) => state.articles.articles
+    (state: { articles: { articles: [] } }) => state.articles.articles
   );
 
   return (

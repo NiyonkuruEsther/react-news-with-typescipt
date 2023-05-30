@@ -7,12 +7,18 @@ import {
   FaFutbol,
 } from "react-icons/fa";
 import { MdScience } from "react-icons/md";
-import { fetchPublishers } from "../features/publisherSlice";
+import {
+  PublishersRootState,
+  fetchPublishers,
+} from "../features/publisherSlice";
 import { Item } from "../types/models/types";
 import { BsCheckAll } from "react-icons/bs";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
 
 function CategoriesSection() {
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<PublishersRootState, undefined, AnyAction> =
+    useDispatch();
 
   const categories = [
     {
@@ -60,7 +66,7 @@ function CategoriesSection() {
   ];
 
   const handleCategoryClick = (categoryName: string): void => {
-    dispatch<any>(fetchPublishers(categoryName.toLowerCase()));
+    dispatch(fetchPublishers(categoryName.toLowerCase()));
   };
 
   return (

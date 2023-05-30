@@ -5,20 +5,24 @@ import { RxCross1 } from "react-icons/rx";
 import { BsSearch } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ArticlesRootState,
   fetchArticles,
   selectArticlesByPublisher,
 } from "../features/newsSlice";
 import SearchArticles from "./SearchArticles";
 import { ArticlesType } from "../types/models/types";
-import { Dispatch } from "redux";
+import { AnyAction, Dispatch } from "redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
 
 function Header() {
   const [tabValue, setTabValue] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<any>();
+  const [searchValue, setSearchValue] = useState<{ id: string } | string>(
+    "general"
+  );
   const searchKeyword: ArticlesType[] = useSelector(selectArticlesByPublisher);
-  const dispatch: Dispatch<any> = useDispatch();
-
+  const dispatch: ThunkDispatch<ArticlesRootState, undefined, AnyAction> =
+    useDispatch();
   useEffect(() => {
     const changeScrolled = () => {
       window.scrollY >= 6 ? setScrolled(true) : setScrolled(false);
@@ -40,7 +44,7 @@ function Header() {
     dispatch(fetchArticles(searchValue));
   }, [dispatch, searchValue]);
 
-  const handleSearchChange = (e: object | any) => {
+  const handleSearchChange = (e: { target: { value: string } }) => {
     setSearchValue(e.target.value);
   };
 

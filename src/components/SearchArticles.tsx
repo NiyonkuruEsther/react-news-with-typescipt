@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { ArticlesType } from "../types/models/types";
 
-function SearchArticles({ articles }: ArticlesType[] | any) {
+function SearchArticles({ articles }: { articles: ArticlesType[] }) {
+  console.log(articles, "whyyyyyyyyyyyyyy");
+
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {articles?.map((article: ArticlesType) => {
+      {articles?.map((article: ArticlesType, index) => {
         return (
           <Link
+            key={`keys ${index}`}
             to={`/news-details/${article.title}`}
             state={{ item: article }}
             className="m-4 grid grid-cols-1 justify-between flex-col hover:bg-blue-950 hover:ring-8 hover:ring-white  shadow-medium hover:cursor-pointer duration-500 group mb-10  flex-shrink-0 mr-4 rounded-[4px] border border-[#E6E6E6] bg-white"
