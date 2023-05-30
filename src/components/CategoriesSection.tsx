@@ -6,13 +6,21 @@ import {
   FaFilm,
   FaFutbol,
 } from "react-icons/fa";
+import { MdScience } from "react-icons/md";
 import { fetchPublishers } from "../features/publisherSlice";
 import { Item } from "../types/models/types";
+import { BsCheckAll } from "react-icons/bs";
 
 function CategoriesSection() {
   const dispatch = useDispatch();
 
   const categories = [
+    {
+      id: 7,
+      name: "General",
+      icon: <BsCheckAll />,
+      color: "from-orange-600 to-orange-400",
+    },
     {
       id: 1,
       name: "Business",
@@ -21,9 +29,21 @@ function CategoriesSection() {
     },
     {
       id: 2,
-      name: "Politics",
+      name: "Health",
       icon: <FaFlag />,
       color: "from-blue-600 to-blue-400",
+    },
+    {
+      id: 5,
+      name: "Sports",
+      icon: <FaFutbol />,
+      color: "from-violet-600 to-violet-400",
+    },
+    {
+      id: 4,
+      name: "Entertainment",
+      icon: <FaFilm />,
+      color: "from-teal-600 to-teal-400",
     },
     {
       id: 3,
@@ -32,16 +52,10 @@ function CategoriesSection() {
       color: "from-green-600 to-green-400",
     },
     {
-      id: 4,
-      name: "Entertainment",
-      icon: <FaFilm />,
-      color: "from-pink-600 to-pink-400",
-    },
-    {
-      id: 5,
-      name: "Sports",
-      icon: <FaFutbol />,
-      color: "from-indigo-600 to-indigo-400",
+      id: 6,
+      name: "Science",
+      icon: <MdScience />,
+      color: "from-lime-600 to-lime-400",
     },
   ];
 

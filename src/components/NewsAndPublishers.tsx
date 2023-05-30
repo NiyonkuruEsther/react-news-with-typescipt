@@ -1,10 +1,7 @@
 import Publisher from "./Publisher";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import {
-  fetchArticles,
-  selectArticlesByPublisher,
-} from "../features/newsSlice";
+import { fetchArticles } from "../features/newsSlice";
 import { Link } from "react-router-dom";
 import { ItemWithImage, ArticlesType } from "../types/models/types";
 
@@ -18,7 +15,6 @@ const NewsAndPublishers = () => {
   );
 
   const dispatch = useDispatch();
-  // console.log(typeof selectedPublisher, "logging");
 
   useEffect(() => {
     dispatch<any>(fetchArticles(selectedPublisher));
@@ -26,7 +22,6 @@ const NewsAndPublishers = () => {
   const articles: ArticlesType[] = useSelector(
     (state: any) => state.articles.articles
   );
-  console.log(selectedPublisher, "stressed out");
 
   return (
     <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 overflow-hidden px-10 mx-auto py-12 flex-col flex gap-8 ">

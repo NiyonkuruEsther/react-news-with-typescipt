@@ -15,10 +15,9 @@ import { Dispatch } from "redux";
 function Header() {
   const [tabValue, setTabValue] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string | object>();
+  const [searchValue, setSearchValue] = useState<any>();
   const searchKeyword: ArticlesType[] = useSelector(selectArticlesByPublisher);
   const dispatch: Dispatch<any> = useDispatch();
-  console.log(searchKeyword);
 
   useEffect(() => {
     const changeScrolled = () => {
