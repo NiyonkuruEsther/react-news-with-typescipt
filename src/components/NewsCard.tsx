@@ -12,7 +12,7 @@ function NewsCard(item: ItemType) {
       state={{ item }}
       className="m-2 md:m-4 grid grid-cols-1 justify-between flex-col hover:bg-blue-950 hover:ring-8 hover:ring-white w-[100%] md:w-[334px] shadow-medium hover:cursor-pointer duration-500 group mb-10 min-[470px]:w-[60%] sm:w-[45%] lg:w-[30%] flex-shrink-0 mr-2 md:mr-4 rounded-[4px] border border-[#E6E6E6] bg-white"
     >
-      {item.urlToImage !== null && (
+      {item.urlToImage !== null && item.urlToImage !== undefined && (
         <img
           src={item.urlToImage}
           alt={item.title}
