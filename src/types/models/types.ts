@@ -30,7 +30,7 @@ export type ArticlesType = {
   source: { id: null | string; name: string | null };
   title: string;
   url: string;
-  urlToImage: string | null;
+  urlToImage: string | null | undefined;
 };
 
 export interface FetchPublishersAction extends Action<string> {
