@@ -22,7 +22,6 @@ const Publisher = ({ onPublisherChange }: PublisherProps) => {
   const dispatch: ThunkDispatch<PublishersRootState, undefined, AnyAction> =
     useDispatch();
   const publishers = useSelector(selectPublishers);
-  console.log(publishers);
 
   const handlePublisherChange = (publisher: { id: string }) => {
     setSelectedPublisher(publisher.id);
@@ -36,9 +35,9 @@ const Publisher = ({ onPublisherChange }: PublisherProps) => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-wrap lg:flex-col gap-8 w-full items-center justify-center">
+    <div className="flex flex-wrap xl:flex-col lg:flex-row gap-8 xl:w-full lg:w-screen md:w-full items-center justify-center">
       {publishers?.length > 0 && (
-        <div className="flex flex-wrap lg:grid gap-3 ">
+        <div className="flex flex-wrap xl:grid lg:flex gap-3 ">
           {publishers
             .slice(0, 5)
             .map((publisher: { id: string; name: string }) => (
