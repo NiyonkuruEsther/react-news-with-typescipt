@@ -44,7 +44,7 @@ const NewsAndPublishers = () => {
                     key={`key-${index}`}
                     className="mb-3  flex justify-between flex-col hover:bg-blue-950 hover:ring-8 hover:ring-white shadow-medium hover:cursor-pointer duration-500 group flex-shrink-0 mr-4 rounded-[4px] border border-[#E6E6E6] bg-white"
                   >
-                    {item.urlToImage !== null && (
+                    {item.urlToImage !== (null | undefined) && (
                       <img
                         src={item.urlToImage}
                         alt={item.title}
