@@ -63,9 +63,6 @@ function Header() {
           <button className="text-gray-600 hover:text-gray-800">
             <FaSearch onClick={handleSearchClick} />
           </button>
-          <button className="text-gray-600 hover:text-gray-800">
-            <FaBars />
-          </button>
         </div>
       </div>
       {tabValue && (

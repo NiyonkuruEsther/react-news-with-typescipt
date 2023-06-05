@@ -59,8 +59,8 @@ const Publisher = ({ onPublisherChange }: PublisherProps) => {
         <BsArrowDown className="text-3xl" />
       </button>
       {publishers?.length > 5 && showAllPublishers && (
-        <div className="fixed z-[10000000] inset-0 h-max overflow-y-scroll bg-gray-700 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-4 rounded-md shadow-lg">
+        <div className="fixed z-[10000000] inset-0  h-screen overflow-y-scroll bg-gray-700 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-4 rounded-md shadow-lg ">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-bold">All Publishers</h2>
               <button

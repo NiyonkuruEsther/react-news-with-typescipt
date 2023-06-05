@@ -33,7 +33,7 @@ const NewsAndPublishers = () => {
   return (
     <div className="max-w-7xl 2xl:px-0 xl:px-5 md:px-8 overflow-hidden px-10 mx-auto py-12 flex-col flex gap-8 ">
       <div className="w-full grid xl:grid-cols-12 lg:grid-cols-1 gap-12 px-6">
-        <div className="order-2 xl:order-first lg:col-span-9">
+        <div className="order-2 xl:order-first lg:col-span-10">
           {selectedPublisher ? (
             <div className="grid xl:grid-cols-3 gap-4">
               {articles !== undefined &&
