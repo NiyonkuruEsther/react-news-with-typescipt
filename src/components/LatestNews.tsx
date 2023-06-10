@@ -2,13 +2,25 @@ import { useEffect, useRef } from "react";
 import NewsCard from "./NewsCard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLatestArticles } from "../features/latestNews";
+import {
+  LatestArticlesRootState,
+  fetchLatestArticles,
+} from "../features/latestNews";
+import { ItemWithImage, ReferenceType } from "../types/models/types";
+import { AnyAction, Dispatch } from "redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+
+interface ItemType extends ItemWithImage {
+  source: { name?: string };
+}
 
 function LatestNews() {
-  const dispatch = useDispatch();
-
-  const blogSect = useRef(null);
-  const latestArticles = useSelector((state) => state.latestArticles.latest);
+  const dispatch: ThunkDispatch<LatestArticlesRootState, undefined, AnyAction> =
+    useDispatch();
+  const blogSect = useRef<HTMLDivElement>(null);
+  const latestArticles: [] = useSelector(
+    (state: { latestArticles: { latest: [] } }) => state.latestArticles.latest
+  );
 
   // Dispatch the action to fetch latest articles on component mount
   useEffect(() => {
@@ -50,8 +62,8 @@ function LatestNews() {
         ref={blogSect}
         className="flex ease-in-out duration-500 max-w-full overflow-x-hidden w-full"
       >
-        {latestArticles.map((item, index) => {
-          return <NewsCard key={index} item={item} />;
+        {latestArticles.map((item: ItemType, index: number) => {
+          return <NewsCard key={index} {...item} />;
         })}
       </div>
     </section>

@@ -5,17 +5,24 @@ import { RxCross1 } from "react-icons/rx";
 import { BsSearch } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ArticlesRootState,
   fetchArticles,
   selectArticlesByPublisher,
 } from "../features/newsSlice";
 import SearchArticles from "./SearchArticles";
+import { ArticlesType } from "../types/models/types";
+import { AnyAction, Dispatch } from "redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
 
 function Header() {
-  const [tabValue, setTabValue] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const searchKeyword = useSelector(selectArticlesByPublisher);
-  const dispatch = useDispatch();
+  const [tabValue, setTabValue] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<{ id: string } | string>(
+    "general"
+  );
+  const searchKeyword: ArticlesType[] = useSelector(selectArticlesByPublisher);
+  const dispatch: ThunkDispatch<ArticlesRootState, undefined, AnyAction> =
+    useDispatch();
   useEffect(() => {
     const changeScrolled = () => {
       window.scrollY >= 6 ? setScrolled(true) : setScrolled(false);
@@ -37,7 +44,7 @@ function Header() {
     dispatch(fetchArticles(searchValue));
   }, [dispatch, searchValue]);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: { target: { value: string } }) => {
     setSearchValue(e.target.value);
   };
 
@@ -55,9 +62,6 @@ function Header() {
         <div className="flex items-center gap-8 text-3xl">
           <button className="text-gray-600 hover:text-gray-800">
             <FaSearch onClick={handleSearchClick} />
-          </button>
-          <button className="text-gray-600 hover:text-gray-800">
-            <FaBars />
           </button>
         </div>
       </div>
@@ -90,7 +94,7 @@ function Header() {
             </div>
           </div>
           <div className="max-w-7xl mx-auto absolute top-[10%] h-screen overflow-y-auto">
-            {searchKeyword.length > 0 && (
+            {searchKeyword !== undefined && searchKeyword.length > 0 && (
               <SearchArticles articles={searchKeyword} />
             )}
           </div>

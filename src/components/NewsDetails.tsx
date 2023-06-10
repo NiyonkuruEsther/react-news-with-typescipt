@@ -1,8 +1,14 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { ItemWithImage } from "../types/models/types";
+
+interface ItemType extends ItemWithImage {
+  url: string;
+  source: { name: string };
+}
 
 function NewsDetails() {
   const location = useLocation();
-  const item = location.state?.item;
+  const item: ItemType = location.state?.item;
 
   return (
     <div className="m-4 pb-4 md:w-[70%] mx-auto shadow-medium h-full rounded-[4px] border border-[#E6E6E6] bg-white">
@@ -24,11 +30,11 @@ function NewsDetails() {
             Read More
           </button>
         </a>
-        <a href="/" className="m-4 ">
+        <Link to="/" className="m-4 ">
           <button className="bg-gray-200 ring-2 ring-gray-400 rounded-md h-fit p-4">
             Go back
           </button>
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -1,11 +1,23 @@
+/* eslint-disable no-useless-catch */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { StateType } from "../types/models/types";
 
-const API_KEY = "51c2b05805f84a918235842524492417";
+const API_KEY = "859502e7ee194c2989ecdaf24a853f82";
 
-const initialArticlesState = {
+interface LatestStateType extends StateType {
+  latest: string[];
+}
+export interface LatestArticlesRootState {
+  latest: LatestStateType;
+}
+const initialArticlesState: LatestStateType = {
   latest: [],
   status: "idle",
   error: null,
+};
+
+export type latestType = {
+  articles: { latest: [] };
 };
 
 export const fetchLatestArticles = createAsyncThunk(
@@ -46,4 +58,5 @@ export const LatestArticlesSlice = createSlice({
   },
 });
 
-export const selectLatestArticles = (state) => state.articles.latest;
+export const selectLatestArticles = (state: latestType) =>
+  state.articles.latest;

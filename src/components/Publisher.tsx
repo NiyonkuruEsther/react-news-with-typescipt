@@ -1,15 +1,29 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPublishers, selectPublishers } from "../features/publisherSlice";
+import {
+  PublishersRootState,
+  fetchPublishers,
+  selectPublishers,
+} from "../features/publisherSlice";
 import { BsArrowDown } from "react-icons/bs";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
-const Publisher = ({ onPublisherChange }) => {
+type OnPublisherChangeFunctionType = (
+  callback: string | { id: string }
+) => void;
+
+type PublisherProps = {
+  onPublisherChange: OnPublisherChangeFunctionType;
+};
+
+const Publisher = ({ onPublisherChange }: PublisherProps) => {
   const [selectedPublisher, setSelectedPublisher] = useState("abc-news");
   const [showAllPublishers, setShowAllPublishers] = useState(false);
-  const dispatch = useDispatch();
-  const { publishers } = useSelector(selectPublishers);
+  const dispatch: ThunkDispatch<PublishersRootState, undefined, AnyAction> =
+    useDispatch();
+  const publishers = useSelector(selectPublishers);
 
-  const handlePublisherChange = (publisher) => {
+  const handlePublisherChange = (publisher: { id: string }) => {
     setSelectedPublisher(publisher.id);
     if (onPublisherChange) {
       onPublisherChange(publisher);
@@ -17,23 +31,25 @@ const Publisher = ({ onPublisherChange }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchPublishers());
+    dispatch(fetchPublishers("general"));
   }, [dispatch]);
 
   return (
-    <div className="flex flex-wrap lg:flex-col gap-8 w-full items-center justify-center">
+    <div className="flex flex-wrap xl:flex-col lg:flex-row gap-8 xl:w-full lg:w-screen md:w-full items-center justify-center">
       {publishers?.length > 0 && (
-        <div className="flex flex-wrap lg:grid gap-3 ">
-          {publishers.slice(0, 5).map((publisher) => (
-            <div key={publisher.id}>
-              <button
-                className="bg-blue-400 p-2 ring-4 w-full rounded-md ring-blue-700 whitespace-nowrap"
-                onClick={() => handlePublisherChange(publisher)}
-              >
-                {publisher.name}
-              </button>
-            </div>
-          ))}
+        <div className="flex flex-wrap xl:grid lg:flex gap-3 ">
+          {publishers
+            .slice(0, 5)
+            .map((publisher: { id: string; name: string }) => (
+              <div key={publisher.id}>
+                <button
+                  className="bg-blue-400 p-2 ring-4 w-full rounded-md ring-blue-700 whitespace-nowrap"
+                  onClick={() => handlePublisherChange(publisher)}
+                >
+                  {publisher.name}
+                </button>
+              </div>
+            ))}
         </div>
       )}
       <button
@@ -43,8 +59,8 @@ const Publisher = ({ onPublisherChange }) => {
         <BsArrowDown className="text-3xl" />
       </button>
       {publishers?.length > 5 && showAllPublishers && (
-        <div className="fixed z-[10000000] inset-0 h-max overflow-y-scroll bg-gray-700 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-4 rounded-md shadow-lg">
+        <div className="fixed z-[10000000] inset-0  h-screen overflow-y-scroll bg-gray-700 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-4 rounded-md shadow-lg ">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-bold">All Publishers</h2>
               <button
@@ -55,7 +71,7 @@ const Publisher = ({ onPublisherChange }) => {
               </button>
             </div>
             <div className="grid grid-cols-2 w-full md:grid-cols-3 lg:grid-cols-6 gap-3 ">
-              {publishers?.map((publisher) => (
+              {publishers?.map((publisher: { id: string; name: string }) => (
                 <button
                   key={publisher.id}
                   className={`p-2 rounded-md ${
